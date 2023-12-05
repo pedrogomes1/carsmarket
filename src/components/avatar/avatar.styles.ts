@@ -5,11 +5,11 @@ export const styles = StyleSheet.create({
     color: '#fff',
   },
   image: {
-    width: 60,
-    height: 60,
+    width: 42,
+    height: 42,
     borderColor: 'red',
     resizeMode: 'cover',
     overflow: 'hidden',
-    borderRadius: 30,
+    borderRadius: 21,
   },
 })
