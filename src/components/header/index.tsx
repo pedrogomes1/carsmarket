@@ -1,17 +1,17 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { styles } from './header.styles'
-import { Avatar } from '../avatar'
-import { Typography } from '../typography'
+import { Avatar } from '../Avatar'
+import { Typography } from '../Typography'
 
 export function Header() {
   return (
     <View style={styles.container}>
       <Avatar />
       <View style={styles.containerProfile}>
-        <Typography text="Welcome," style={styles.text} />
+        <Typography text="Welcome," />
         <Typography
           text="Pedro Gomes"
-          style={[styles.text, styles.username]}
+          style={styles.username}
           type="SemiBold"
         />
       </View>
