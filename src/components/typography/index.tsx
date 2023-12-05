@@ -13,12 +13,16 @@ interface ITextProps extends TextProps {
   text: string
   type?: FontKeys
   style?: TextStyle | TextStyle[]
+  color?: TextStyle['color']
 }
 
-export function Typography({ text, type = 'Regular', style }: ITextProps) {
-  const font = {
-    fontFamily: FontTypes[type],
-  }
-
-  return <Text style={[font, style]}>{text}</Text>
+export function Typography({
+  text,
+  color = '#fff',
+  type = 'Regular',
+  style,
+}: ITextProps) {
+  return (
+    <Text style={[{ color, fontFamily: FontTypes[type] }, style]}>{text}</Text>
+  )
 }
