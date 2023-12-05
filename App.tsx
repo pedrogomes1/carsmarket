@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
-import { SafeAreaView, View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 
-import { Home } from './src/screens/home'
+import { Home } from './src/screens/Home'
 
 SplashScreen.preventAutoHideAsync()
 
