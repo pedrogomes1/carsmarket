@@ -14,4 +14,7 @@ export const styles = StyleSheet.create({
   username: {
     fontSize: 16,
   },
+  logoutButton: {
+    marginLeft: 'auto',
+  },
 })
