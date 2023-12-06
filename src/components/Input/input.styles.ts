@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   input: {
     backgroundColor: 'transparent',
     flex: 1,
-    fontFamily: 'Poppins-Regular',
+    fontFamily: 'Nunito-Regular',
     color: '#fff',
   },
 })

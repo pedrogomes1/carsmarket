@@ -9,10 +9,11 @@ SplashScreen.preventAutoHideAsync()
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
-    'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
-    'Poppins-SemiBold': require('./assets/fonts/Poppins-SemiBold.ttf'),
-    'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
+    'Nunito-Regular': require('./assets/fonts/Nunito-Regular.ttf'),
+    'Nunito-Medium': require('./assets/fonts/Nunito-Medium.ttf'),
+    'Nunito-SemiBold': require('./assets/fonts/Nunito-SemiBold.ttf'),
+    'Nunito-Bold': require('./assets/fonts/Nunito-Bold.ttf'),
+    'Nunito-ExtraBold': require('./assets/fonts/Nunito-ExtraBold.ttf'),
   })
 
   const onLayoutRootView = useCallback(async () => {

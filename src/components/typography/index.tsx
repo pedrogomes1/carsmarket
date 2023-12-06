@@ -1,10 +1,11 @@
 import { Text, TextProps, TextStyle } from 'react-native'
 
 enum FontTypes {
-  'Regular' = 'Poppins-Regular',
-  'Medium' = 'Poppins-Medium',
-  'SemiBold' = 'Poppins-SemiBold',
-  'Bold' = 'Poppins-Bold',
+  'Regular' = 'Nunito-Regular',
+  'Medium' = 'Nunito-Medium',
+  'SemiBold' = 'Nunito-SemiBold',
+  'Bold' = 'Nunito-Bold',
+  'ExtraBold' = 'Nunito-ExtraBold',
 }
 
 type FontKeys = keyof typeof FontTypes
