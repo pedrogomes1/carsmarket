@@ -5,4 +5,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 20,
   },
+  title: {
+    fontSize: 18,
+  },
 })
