@@ -8,12 +8,11 @@ import { Categories } from '../../components/Categories'
 import { AvailableCars } from '../../components/AvailableCars'
 
 import blurBg from '../../../src/assets/background.png'
-
 import { styles } from './home.styles'
 
 const SEARCH_ICON = <SearchIcon name="search1" size={24} color="#80849399" />
 
-export function Home() {
+export default function Home() {
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
       <ScrollView>
@@ -36,6 +35,7 @@ export function Home() {
             <Input.Icon icon={SEARCH_ICON} />
             <Input.Text
               placeholder="Search"
+              autoCapitalize="none"
               inputMode="search"
               placeholderTextColor="#80849399"
             />
