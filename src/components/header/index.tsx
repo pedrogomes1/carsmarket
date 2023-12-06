@@ -9,11 +9,7 @@ export function Header() {
       <Avatar />
       <View style={styles.containerProfile}>
         <Typography text="Welcome," />
-        <Typography
-          text="Pedro Gomes"
-          style={styles.username}
-          type="SemiBold"
-        />
+        <Typography text="Pedro Gomes" style={styles.username} type="Bold" />
       </View>
     </View>
   )
