@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { FlatList } from 'react-native'
-import { CarCategory } from '../Cards/CarCategory'
+import { CarCategory } from './CarCategory'
 import { styles } from './categories.styles'
 
 type ItemData = {
