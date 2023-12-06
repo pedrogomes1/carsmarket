@@ -1,16 +1,17 @@
 import { View, ImageBackground, ScrollView } from 'react-native'
-import FeatherIcon from '@expo/vector-icons/Feather'
+import SearchIcon from '@expo/vector-icons/AntDesign'
 
 import { Header } from '../../components/Header'
 import { Typography } from '../../components/Typography'
 import { Input } from '../../components/Input'
 import { Categories } from '../../components/Categories'
+import { AvailableCars } from '../../components/AvailableCars'
 
 import blurBg from '../../../src/assets/background.png'
 
 import { styles } from './home.styles'
 
-const SEARCH_ICON = <FeatherIcon name="search" size={24} color="#80849399" />
+const SEARCH_ICON = <SearchIcon name="search1" size={24} color="#80849399" />
 
 export function Home() {
   return (
@@ -26,7 +27,7 @@ export function Home() {
           />
           <Typography
             text="Desired vehicle"
-            type="Bold"
+            type="ExtraBold"
             color="#6679C0"
             style={styles.searchTitle}
           />
@@ -42,6 +43,8 @@ export function Home() {
         </View>
 
         <Categories />
+
+        <AvailableCars />
       </ScrollView>
     </ImageBackground>
   )
