@@ -3,6 +3,7 @@ import * as SecureStore from 'expo-secure-store'
 
 import { useProtectedRouter } from '../hooks/useProtectedRouter'
 import { api } from '../libs/api'
+import { router } from 'expo-router'
 
 const AUTH_KEY = 'router-manager-token'
 
@@ -81,6 +82,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     await SecureStore.deleteItemAsync(AUTH_KEY)
     setUserToken('')
     setUser(null)
+    router.replace('/sign-in')
   }
 
   return (
