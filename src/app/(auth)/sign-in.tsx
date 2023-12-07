@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from 'react-native'
 import axios from 'axios'
-import Icon from '@expo/vector-icons/Feather'
+import { Feather as FeatherIcon, Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { Input } from '@/components/Input'
@@ -24,6 +24,7 @@ export default function SignIn() {
   const [isLoading, setIsLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const { signIn } = useAuth()
 
   async function handleSignIn() {
@@ -41,6 +42,10 @@ export default function SignIn() {
     } finally {
       setIsLoading(false)
     }
+  }
+
+  function handlePressVisiblePassword() {
+    setIsPasswordVisible((prev) => !prev)
   }
 
   return (
@@ -61,7 +66,7 @@ export default function SignIn() {
 
       <Input.Root>
         <Input.Icon
-          icon={<Icon name="mail" size={20} color={colors.gray_400} />}
+          icon={<FeatherIcon name="mail" size={20} color={colors.gray_400} />}
         />
         <Input.Text
           placeholder="Email"
@@ -73,13 +78,25 @@ export default function SignIn() {
 
       <Input.Root>
         <Input.Icon
-          icon={<Icon name="lock" size={20} color={colors.gray_400} />}
+          icon={<FeatherIcon name="lock" size={20} color={colors.gray_400} />}
         />
         <Input.Text
           placeholder="Password"
-          secureTextEntry={true}
+          secureTextEntry={isPasswordVisible}
           autoCapitalize="none"
           placeholderTextColor={colors.gray_400}
+        />
+        <Input.Action
+          onPress={handlePressVisiblePassword}
+          icon={
+            <Ionicons
+              name={`${
+                isPasswordVisible ? 'md-eye-outline' : 'md-eye-off-outline'
+              }`}
+              size={20}
+              color={colors.gray_400}
+            />
+          }
         />
       </Input.Root>
 
