@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
-import { AuthProvider } from '../contexts/auth-provider'
+import { AuthProvider } from '@contexts/auth-provider'
 
 export default function App() {
   const [fontsLoaded] = useFonts({

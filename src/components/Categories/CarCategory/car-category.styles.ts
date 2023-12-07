@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { spacing, colors, radius } from '../../../styles/theme'
+import { spacing, colors, radius } from '@styles/theme'
 
 const CARD_SIZE = 88
 const IMAGE_SIZE = 30

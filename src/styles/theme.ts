@@ -11,6 +11,8 @@ const theme = {
     gray_400: '#80849399',
     gray_500: '#d8d8d833',
     gray_700: '#d8d8d80d',
+
+    yellow: '#EFAC4E',
   },
   spacing: {
     4: 4,

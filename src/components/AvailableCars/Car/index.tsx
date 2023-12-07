@@ -1,10 +1,11 @@
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import Icon from '@expo/vector-icons/AntDesign'
-import { Typography } from '../../Typography'
 
+import { Typography } from '@components/Typography'
+import CarIcon from '@assets/car.svg'
+
+import { colors } from '@styles/theme'
 import { styles } from './car.style'
-
-import CarIcon from '../../../assets/car.svg'
 
 export function Car() {
   return (
@@ -12,7 +13,12 @@ export function Car() {
       <CarIcon />
       <Typography text="Jaguar F Pace" weight="bold" style={styles.name} />
       <View style={styles.containerRating}>
-        <Icon name="staro" size={18} color="#EFAC4E" style={styles.starIcon} />
+        <Icon
+          name="staro"
+          size={18}
+          color={colors.yellow}
+          style={styles.starIcon}
+        />
         <Typography text="4.9" weight="extraBold" />
         <Typography
           text="(120 Reviews)"

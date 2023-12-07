@@ -1,7 +1,7 @@
 import { Text, TextProps, TextStyle } from 'react-native'
-import { theme } from '../../styles/theme'
+import { fonts } from '@styles/theme'
 
-type FontKeys = keyof typeof theme.fonts
+type FontKeys = keyof typeof fonts
 
 interface ITextProps extends TextProps {
   text: string
@@ -17,8 +17,6 @@ export function Typography({
   style,
 }: ITextProps) {
   return (
-    <Text style={[{ color, fontFamily: theme.fonts[weight] }, style]}>
-      {text}
-    </Text>
+    <Text style={[{ color, fontFamily: fonts[weight] }, style]}>{text}</Text>
   )
 }

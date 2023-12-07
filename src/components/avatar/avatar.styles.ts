@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { colors } from '../../styles/theme'
+import { colors } from '@styles/theme'
 
 const AVATAR_SIZE = 42
 
