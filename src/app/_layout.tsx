@@ -1,9 +1,12 @@
+import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
-import { Stack } from 'expo-router'
-import { AuthProvider } from '@contexts/auth-provider'
+import { Stack, SplashScreen } from 'expo-router'
+import { AuthProvider } from '@/contexts/auth-provider'
+
+SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     'Nunito-Regular': require('../../assets/fonts/Nunito-Regular.ttf'),
     'Nunito-Medium': require('../../assets/fonts/Nunito-Medium.ttf'),
     'Nunito-SemiBold': require('../../assets/fonts/Nunito-SemiBold.ttf'),
@@ -11,7 +14,17 @@ export default function App() {
     'Nunito-ExtraBold': require('../../assets/fonts/Nunito-ExtraBold.ttf'),
   })
 
-  if (!fontsLoaded) return null
+  useEffect(() => {
+    if (fontsLoaded) {
+      setTimeout(() => {
+        SplashScreen.hideAsync()
+      }, 1000)
+    }
+  }, [fontsLoaded])
+
+  if (!fontsLoaded && !fontError) {
+    return null
+  }
 
   return (
     <AuthProvider>
