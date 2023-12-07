@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   review: {
     textDecorationLine: 'underline',
-    fontSize: fontSize.sm,
+    fontSize: fontSize.xs,
     color: colors.gray_100,
   },
   price: {

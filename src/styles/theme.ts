@@ -33,7 +33,7 @@ const theme = {
     10: 10,
   },
   fontSize: {
-    xs: 10,
+    xs: 12,
     base: 14,
     sm: 16,
     lg: 18,
