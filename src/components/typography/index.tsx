@@ -1,5 +1,5 @@
 import { Text, TextProps, TextStyle } from 'react-native'
-import { fonts } from '@styles/theme'
+import { fonts } from '@/styles/theme'
 
 type FontKeys = keyof typeof fonts
 

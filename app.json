@@ -24,6 +24,10 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "experiments": {
+      "typedRoutes": true,
+      "tsconfigPaths": true
+    },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"

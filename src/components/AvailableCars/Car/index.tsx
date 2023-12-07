@@ -1,10 +1,10 @@
 import { View } from 'react-native'
 import Icon from '@expo/vector-icons/AntDesign'
 
-import { Typography } from '@components/Typography'
-import CarIcon from '@assets/car.svg'
+import { Typography } from '@/components/Typography'
+import CarIcon from '@/assets/car.svg'
 
-import { colors } from '@styles/theme'
+import { colors } from '@/styles/theme'
 import { styles } from './car.style'
 
 export function Car() {

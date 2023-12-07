@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native'
 
-import { Typography } from '@components/Typography'
+import { Typography } from '@/components/Typography'
 import { Car } from './Car'
 
 import { styles } from './available-cars.style'

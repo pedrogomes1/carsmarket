@@ -1,12 +1,12 @@
 import { View, TouchableOpacity } from 'react-native'
 import Icon from '@expo/vector-icons/MaterialIcons'
 
-import { Avatar } from '@components/Avatar'
-import { Typography } from '@components/Typography'
-import { useAuth } from '@hooks/useAuth'
+import { Avatar } from '@/components/Avatar'
+import { Typography } from '@/components/Typography'
+import { useAuth } from '@/hooks/useAuth'
 
 import { styles } from './header.styles'
-import { colors } from '@styles/theme'
+import { colors } from '@/styles/theme'
 
 export function Header() {
   const { signOut } = useAuth()
