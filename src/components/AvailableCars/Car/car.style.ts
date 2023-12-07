@@ -1,34 +1,35 @@
 import { StyleSheet } from 'react-native'
+import { spacing, radius, colors, fontSize } from '../../../styles/theme'
 
 export const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 20,
+    marginTop: spacing[20],
+    paddingHorizontal: spacing[20],
+    paddingVertical: spacing[20],
     borderWidth: 1,
-    borderColor: '#d8d8d833',
-    borderRadius: 10,
-    backgroundColor: '#d8d8d80d',
+    borderColor: colors.gray_500,
+    borderRadius: radius[10],
+    backgroundColor: colors.gray_700,
   },
   name: {
-    marginTop: 25,
+    marginTop: spacing[24],
   },
   starIcon: {
-    marginRight: 10,
+    marginRight: spacing[12],
   },
   containerRating: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 10,
-    gap: 5,
+    marginTop: spacing[12],
+    gap: spacing[4],
   },
   review: {
     textDecorationLine: 'underline',
-    fontSize: 12,
-    color: '#808493',
+    fontSize: fontSize.sm,
+    color: colors.gray_100,
   },
   price: {
     marginLeft: 'auto',
-    fontSize: 18,
+    fontSize: fontSize.lg,
   },
 })

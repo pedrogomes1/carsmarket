@@ -1,18 +1,11 @@
 import { Text, TextProps, TextStyle } from 'react-native'
+import { theme } from '../../styles/theme'
 
-enum FontTypes {
-  'Regular' = 'Nunito-Regular',
-  'Medium' = 'Nunito-Medium',
-  'SemiBold' = 'Nunito-SemiBold',
-  'Bold' = 'Nunito-Bold',
-  'ExtraBold' = 'Nunito-ExtraBold',
-}
-
-type FontKeys = keyof typeof FontTypes
+type FontKeys = keyof typeof theme.fonts
 
 interface ITextProps extends TextProps {
   text: string
-  type?: FontKeys
+  weight?: FontKeys
   style?: TextStyle | TextStyle[]
   color?: TextStyle['color']
 }
@@ -20,10 +13,12 @@ interface ITextProps extends TextProps {
 export function Typography({
   text,
   color = '#fff',
-  type = 'Regular',
+  weight = 'regular',
   style,
 }: ITextProps) {
   return (
-    <Text style={[{ color, fontFamily: FontTypes[type] }, style]}>{text}</Text>
+    <Text style={[{ color, fontFamily: theme.fonts[weight] }, style]}>
+      {text}
+    </Text>
   )
 }

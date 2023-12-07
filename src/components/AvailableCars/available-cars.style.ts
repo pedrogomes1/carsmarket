@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
+import { spacing, fontSize } from '../../styles/theme'
 
 export const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: spacing[20],
+    marginTop: spacing[20],
   },
   title: {
-    fontSize: 18,
+    fontSize: fontSize.lg,
   },
 })

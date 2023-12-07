@@ -10,12 +10,16 @@ export function Car() {
   return (
     <View style={styles.container}>
       <CarIcon />
-      <Typography text="Jaguar F Pace" type="Bold" style={styles.name} />
+      <Typography text="Jaguar F Pace" weight="bold" style={styles.name} />
       <View style={styles.containerRating}>
         <Icon name="staro" size={18} color="#EFAC4E" style={styles.starIcon} />
-        <Typography text="4.9" type="ExtraBold" />
-        <Typography text="(120 Reviews)" type="Medium" style={styles.review} />
-        <Typography text="$540.000" type="Bold" style={styles.price} />
+        <Typography text="4.9" weight="extraBold" />
+        <Typography
+          text="(120 Reviews)"
+          weight="medium"
+          style={styles.review}
+        />
+        <Typography text="$540.000" weight="bold" style={styles.price} />
       </View>
     </View>
   )

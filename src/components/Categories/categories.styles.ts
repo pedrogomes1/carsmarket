@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native'
+import { spacing } from '../../styles/theme'
 
 export const styles = StyleSheet.create({
   list: {
-    marginHorizontal: 20,
+    marginHorizontal: spacing[20],
   },
   itens: {
-    gap: 15,
+    gap: spacing[16],
   },
 })

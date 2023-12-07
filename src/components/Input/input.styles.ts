@@ -1,21 +1,22 @@
 import { StyleSheet } from 'react-native'
+import { spacing, colors, radius, fonts } from '../../styles/theme'
 
 export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 10,
+    gap: spacing[8],
     alignItems: 'center',
-    backgroundColor: 'rgba(102, 121, 192, 0.20)',
-    marginTop: 20,
+    backgroundColor: colors.blue_900,
+    marginTop: spacing[20],
     height: 50,
-    borderRadius: 10,
-    paddingRight: 20,
-    paddingLeft: 10,
+    borderRadius: radius[10],
+    paddingRight: spacing[20],
+    paddingLeft: spacing[8],
   },
   input: {
     backgroundColor: 'transparent',
     flex: 1,
-    fontFamily: 'Nunito-Regular',
-    color: '#fff',
+    fontFamily: fonts.regular,
+    color: colors.white,
   },
 })

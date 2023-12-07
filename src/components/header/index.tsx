@@ -14,7 +14,7 @@ export function Header() {
       <Avatar />
       <View style={styles.containerProfile}>
         <Typography text="Welcome," />
-        <Typography text="Pedro Gomes" style={styles.username} type="Bold" />
+        <Typography text="Pedro Gomes" style={styles.username} weight="bold" />
       </View>
       <TouchableOpacity onPress={signOut} style={styles.logoutButton}>
         <Icon name="logout" size={22} color="#fff" />

@@ -9,8 +9,11 @@ import { AvailableCars } from '../../components/AvailableCars'
 
 import blurBg from '../../../src/assets/background.png'
 import { styles } from './home.styles'
+import { colors } from '../../styles/theme'
 
-const SEARCH_ICON = <SearchIcon name="search1" size={24} color="#80849399" />
+const SEARCH_ICON = (
+  <SearchIcon name="search1" size={24} color={colors.gray_400} />
+)
 
 export default function Home() {
   return (
@@ -21,13 +24,13 @@ export default function Home() {
         <View style={styles.containerSearchTitle}>
           <Typography
             text="Select or search your"
-            type="Bold"
+            weight="bold"
             style={styles.searchTitle}
           />
           <Typography
             text="Desired vehicle"
-            type="ExtraBold"
-            color="#6679C0"
+            weight="extraBold"
+            color={colors.blue_300}
             style={styles.searchTitle}
           />
 
@@ -37,7 +40,7 @@ export default function Home() {
               placeholder="Search"
               autoCapitalize="none"
               inputMode="search"
-              placeholderTextColor="#80849399"
+              placeholderTextColor={colors.gray_400}
             />
           </Input.Root>
         </View>

@@ -1,15 +1,17 @@
 import { StyleSheet } from 'react-native'
+import { colors } from '../../styles/theme'
+
+const AVATAR_SIZE = 42
 
 export const styles = StyleSheet.create({
   container: {
-    color: '#fff',
+    color: colors.white,
   },
   image: {
-    width: 42,
-    height: 42,
-    borderColor: 'red',
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
     resizeMode: 'cover',
     overflow: 'hidden',
-    borderRadius: 21,
+    borderRadius: AVATAR_SIZE / 2,
   },
 })
