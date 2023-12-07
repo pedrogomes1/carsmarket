@@ -1,15 +1,15 @@
 import { View, ImageBackground, ScrollView } from 'react-native'
 import SearchIcon from '@expo/vector-icons/AntDesign'
 
-import { Header } from '@components/Header'
-import { Typography } from '@components/Typography'
-import { Input } from '@components/Input'
-import { Categories } from '@components/Categories'
-import { AvailableCars } from '@components/AvailableCars'
+import { Header } from '@/components/Header'
+import { Typography } from '@/components/Typography'
+import { Input } from '@/components/Input'
+import { Categories } from '@/components/Categories'
+import { AvailableCars } from '@/components/AvailableCars'
 
-import blurBg from '@assets/background.png'
-import { colors } from '@styles/theme'
-import { styles } from './home.styles'
+import blurBg from '@/assets/background.png'
+import { colors } from '@/styles/theme'
+import { styles } from '../styles/home.styles'
 
 const SEARCH_ICON = (
   <SearchIcon name="search1" size={24} color={colors.gray_400} />
