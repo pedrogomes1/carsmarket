@@ -1,4 +1,4 @@
-import { Input as InputText } from './Input'
+import { InputText } from './Input'
 import { InputIcon } from './InputIcon'
 import { InputRoot } from './InputRoot'
 import { InputIconAction } from './InputIconAction'
