@@ -1,10 +1,16 @@
 import { StyleSheet } from 'react-native'
-import { spacing, colors, radius } from '@/styles/theme'
+import { colors, radius, spacing } from '@/styles/theme'
 
 const CARD_SIZE = 88
 const IMAGE_SIZE = 30
 
 export const styles = StyleSheet.create({
+  list: {
+    marginHorizontal: spacing[20],
+  },
+  itens: {
+    gap: spacing[16],
+  },
   item: {
     alignItems: 'center',
     justifyContent: 'center',

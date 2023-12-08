@@ -1,8 +1,8 @@
 import { View, TouchableOpacity } from 'react-native'
 import Icon from '@expo/vector-icons/MaterialIcons'
 
-import { Avatar } from '@/components/Avatar'
-import { Typography } from '@/components/Typography'
+import { Avatar } from '@/components/ui/avatar'
+import { Typography } from '@/components/ui/typography'
 import { useAuth } from '@/hooks/useAuth'
 
 import { styles } from './header.styles'

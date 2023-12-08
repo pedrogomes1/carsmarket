@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import { Stack, SplashScreen } from 'expo-router'
+import { ToastProvider } from 'react-native-toast-notifications'
 import { AuthProvider } from '@/contexts/auth-provider'
 
 SplashScreen.preventAutoHideAsync()
@@ -27,8 +28,10 @@ export default function App() {
   }
 
   return (
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }} />
-    </AuthProvider>
+    <ToastProvider>
+      <AuthProvider>
+        <Stack screenOptions={{ headerShown: false }} />
+      </AuthProvider>
+    </ToastProvider>
   )
 }

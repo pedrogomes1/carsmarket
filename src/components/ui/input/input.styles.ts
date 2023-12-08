@@ -7,11 +7,10 @@ export const styles = StyleSheet.create({
     gap: spacing[8],
     alignItems: 'center',
     backgroundColor: colors.blue_900,
-    marginTop: spacing[20],
     height: 50,
     borderRadius: radius[10],
     paddingRight: spacing[20],
-    paddingLeft: spacing[8],
+    paddingLeft: spacing[12],
   },
   input: {
     backgroundColor: 'transparent',

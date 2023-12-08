@@ -1,11 +1,11 @@
 import { View, ImageBackground, ScrollView } from 'react-native'
 import SearchIcon from '@expo/vector-icons/AntDesign'
 
-import { Header } from '@/components/Header'
-import { Typography } from '@/components/Typography'
-import { Input } from '@/components/Input'
-import { Categories } from '@/components/Categories'
-import { AvailableCars } from '@/components/AvailableCars'
+import { Header } from '@/components/ui/header'
+import { Typography } from '@/components/ui/typography'
+import { Input } from '@/components/ui/input'
+import { Categories } from '@/components/screens/home/categories'
+import { AvailableCars } from '@/components/screens/home/available-cars'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'

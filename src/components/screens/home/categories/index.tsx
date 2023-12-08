@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
-import { FlatList } from 'react-native'
-import { CarCategory } from './CarCategory'
+import { FlatList, TouchableOpacity } from 'react-native'
 import { styles } from './categories.styles'
+import { Typography } from '@/components/ui/typography'
+
+import CategoryIcon from '@/assets/bmw.svg'
 
 type ItemData = {
   id: string
@@ -40,11 +42,10 @@ export const Categories = () => {
       style={styles.list}
       renderItem={({ item }: { item: ItemData }) => {
         return (
-          <CarCategory
-            title={item.title}
-            onPress={() => setSelectedId(item.id)}
-            isSelected={item.id === selectedId}
-          />
+          <TouchableOpacity onPress={() => {}} style={styles.item}>
+            <CategoryIcon />
+            <Typography text={item.title} />
+          </TouchableOpacity>
         )
       }}
       contentContainerStyle={styles.itens}

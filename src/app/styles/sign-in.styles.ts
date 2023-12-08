@@ -8,7 +8,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.darkness,
     padding: spacing[24],
-    gap: spacing[20],
+  },
+  logoImage: {
+    width: 200,
+    height: 150,
   },
   title: {
     fontSize: fontSize.xl,
@@ -17,22 +20,14 @@ export const styles = StyleSheet.create({
   subtitle: {
     maxWidth: 260,
     textAlign: 'center',
-  },
-  loginButton: {
-    width: '100%',
-    height: spacing[48],
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: radius[10],
-  },
-  textLoginButton: {
-    fontSize: fontSize.lg,
+    marginTop: spacing[20],
+    marginBottom: spacing[12],
   },
   separatorContainer: {
     width: '100%',
     flexDirection: 'row',
     gap: spacing[8],
-    marginTop: spacing[20],
+    marginVertical: spacing[20],
     alignItems: 'center',
   },
   separator: {

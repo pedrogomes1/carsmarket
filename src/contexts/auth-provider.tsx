@@ -4,6 +4,7 @@ import * as SecureStore from 'expo-secure-store'
 import { useProtectedRouter } from '../hooks/useProtectedRouter'
 import { api } from '../libs/api'
 import { router } from 'expo-router'
+import { useToast } from 'react-native-toast-notifications'
 
 const AUTH_KEY = 'router-manager-token'
 
@@ -30,6 +31,7 @@ type AuthProviderProps = {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null)
   const [userToken, setUserToken] = useState('')
+  const toast = useToast()
 
   useProtectedRouter(userToken)
 
@@ -74,6 +76,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       await getUser()
     } catch (error) {
+      toast.show('Error when authenticating', {
+        placement: 'top',
+        type: 'danger',
+      })
       throw error
     }
   }

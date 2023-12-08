@@ -1,8 +1,15 @@
 import { StyleSheet } from 'react-native'
-import { spacing, radius, colors, fontSize } from '@/styles/theme'
+import { spacing, fontSize, colors, radius } from '@/styles/theme'
 
 export const styles = StyleSheet.create({
   container: {
+    marginHorizontal: spacing[20],
+    marginTop: spacing[20],
+  },
+  title: {
+    fontSize: fontSize.lg,
+  },
+  containerCar: {
     marginTop: spacing[20],
     paddingHorizontal: spacing[20],
     paddingVertical: spacing[20],
