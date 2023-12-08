@@ -2,8 +2,11 @@ import { useEffect } from 'react'
 import { useFonts } from 'expo-font'
 import { Stack, SplashScreen } from 'expo-router'
 import { ToastProvider } from 'react-native-toast-notifications'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 import { AuthProvider } from '@/contexts/auth-provider'
 
+const client = new QueryClient()
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
@@ -28,10 +31,12 @@ export default function App() {
   }
 
   return (
-    <ToastProvider>
-      <AuthProvider>
-        <Stack screenOptions={{ headerShown: false }} />
-      </AuthProvider>
-    </ToastProvider>
+    <QueryClientProvider client={client}>
+      <ToastProvider>
+        <AuthProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+        </AuthProvider>
+      </ToastProvider>
+    </QueryClientProvider>
   )
 }
