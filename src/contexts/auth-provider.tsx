@@ -1,25 +1,17 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
-import * as SecureStore from 'expo-secure-store'
+import { ReactNode, createContext, useEffect } from 'react'
 
 import { useProtectedRouter } from '../hooks/useProtectedRouter'
-import { api } from '../libs/api'
 import { router } from 'expo-router'
-import { useToast } from 'react-native-toast-notifications'
-
-const AUTH_KEY = 'router-manager-token'
-
-type User = {
-  id: string
-  name: string
-  role: string
-  bio: string
-  avatar_url: string
-}
+import { useToken } from '@/hooks/useToken'
+import { useSecureStore } from '@/hooks/useSecureStore'
+import { User, useUser } from '@/hooks/useUser'
+import { useSignIn } from '@/hooks/useSignIn'
 
 type AuthContextData = {
   user: User | null
   signIn: (email: string, password: string) => Promise<void>
   signOut: () => Promise<void>
+  isPending: boolean
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -29,15 +21,16 @@ type AuthProviderProps = {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<User | null>(null)
-  const [userToken, setUserToken] = useState('')
-  const toast = useToast()
+  const { userToken, resetToken, updateToken } = useToken()
+  const { getSecureStore, deleteSecureStore } = useSecureStore()
+  const { user, setUser, getUser } = useUser()
+  const { signIn: signInUser, isPending } = useSignIn()
 
   useProtectedRouter(userToken)
 
   useEffect(() => {
     async function loadUser() {
-      const storageToken = await SecureStore.getItemAsync(AUTH_KEY)
+      const storageToken = await getSecureStore()
       if (storageToken) {
         updateToken(storageToken)
         await getUser()
@@ -47,52 +40,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
     loadUser()
   }, [])
 
-  function updateToken(token: string) {
-    setUserToken(token)
-    api.defaults.headers.common.Authorization = `Bearer ${token}`
-  }
-
-  async function getUser() {
-    try {
-      const response = await api.get('/me')
-      const { me } = response.data
-      setUser(me)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   async function signIn(email: string, password: string) {
-    try {
-      const response = await api.post('/sessions', {
-        email,
-        password,
-      })
-
-      const { token } = response.data
-
-      updateToken(token)
-      await SecureStore.setItemAsync(AUTH_KEY, token)
-
-      await getUser()
-    } catch (error) {
-      toast.show('Error when authenticating', {
-        placement: 'top',
-        type: 'danger',
-      })
-      throw error
-    }
+    signInUser({ email, password })
   }
 
   async function signOut() {
-    await SecureStore.deleteItemAsync(AUTH_KEY)
-    setUserToken('')
+    await deleteSecureStore()
+    resetToken()
     setUser(null)
     router.replace('/sign-in')
   }
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, isPending, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
