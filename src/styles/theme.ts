@@ -4,6 +4,7 @@ const theme = {
     darkness: '#131A34',
 
     blue_100: '#dbeafe',
+    blue_200: '#348AC7',
     blue_300: '#6679C0',
     blue_900: '#6679c033',
 
@@ -13,6 +14,9 @@ const theme = {
     gray_700: '#d8d8d80d',
 
     yellow: '#EFAC4E',
+    red: '#c53030',
+
+    purple: '#7474BF',
   },
   spacing: {
     4: 4,
