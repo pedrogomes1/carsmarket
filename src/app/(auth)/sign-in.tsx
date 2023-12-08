@@ -8,12 +8,12 @@ import GoogleIcon from '@/assets/google.svg'
 
 import { styles } from '../styles/sign-in.styles'
 import { colors } from '@/styles/theme'
-import { FormSchema, SignInForm } from '@/components/forms/sign-in'
+import { SignInFormSchema, SignInForm } from '@/components/forms/sign-in'
 
 export default function SignIn() {
-  const { signIn } = useAuth()
+  const { signIn, isPending } = useAuth()
 
-  async function handleSignIn({ email, password }: FormSchema) {
+  async function handleSignIn({ email, password }: SignInFormSchema) {
     await signIn(email, password)
   }
 
@@ -27,7 +27,7 @@ export default function SignIn() {
         style={styles.subtitle}
       />
 
-      <SignInForm onSignIn={handleSignIn} />
+      <SignInForm onSignIn={handleSignIn} isPending={isPending} />
 
       <View style={styles.separatorContainer}>
         <View style={styles.separator} />

@@ -3,7 +3,7 @@ import { router } from 'expo-router'
 import { useToast } from 'react-native-toast-notifications'
 
 import { api } from '@/libs/api'
-import { FormSchema } from '@/components/forms/sign-in'
+import { SignInFormSchema } from '@/components/forms/sign-in'
 
 import { useToken } from './useToken'
 import { useSecureStore } from './useSecureStore'
@@ -16,7 +16,7 @@ export function useSignIn() {
   const toast = useToast()
 
   const { mutate: signIn, isPending } = useMutation({
-    mutationFn: ({ email, password }: FormSchema) => {
+    mutationFn: ({ email, password }: SignInFormSchema) => {
       return api.post('/sessions', { email, password })
     },
     onSuccess: async (response) => {

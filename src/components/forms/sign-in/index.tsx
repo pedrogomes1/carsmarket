@@ -1,16 +1,18 @@
 import { useState } from 'react'
-import { useForm, Controller } from 'react-hook-form'
 import { ActivityIndicator, TouchableOpacity } from 'react-native'
 import { z } from 'zod'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Feather as FeatherIcon, Ionicons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 
 import { Input } from '@/components/ui/input'
 import { Typography } from '@/components/ui/typography'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { SignInFormData } from './sign-in.types'
+import { signInValidationSchema } from './sign-in.validation'
 
-import { styles } from './sign-in.styles'
 import { colors } from '@/styles/theme'
+import { styles } from './sign-in.styles'
 
 const MAIL_ICON = <FeatherIcon name="mail" size={20} color={colors.gray_400} />
 const LOCK_ICON = <FeatherIcon name="lock" size={20} color={colors.gray_400} />
@@ -25,39 +27,25 @@ function getPasswordIcon(isPasswordVisible: boolean) {
   )
 }
 
-type SignInFormData = {
-  email: string
-  password: string
-}
-
-const validationSchema = z.object({
-  email: z
-    .string({ required_error: 'Email is mandatory' })
-    .email('Enter a valid email address'),
-  password: z
-    .string({ required_error: 'Password is mandatory' })
-    .min(5, 'Minimum of 5 characters'),
-})
-
 interface SignInFormProps {
   onSignIn: (data: SignInFormData) => void
+  isPending: boolean
 }
 
-export type FormSchema = z.infer<typeof validationSchema>
+export type SignInFormSchema = z.infer<typeof signInValidationSchema>
 
-export function SignInForm({ onSignIn }: SignInFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
+export function SignInForm({ onSignIn, isPending }: SignInFormProps) {
   const [shouldHidePassword, setShouldHidePassword] = useState(true)
 
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormSchema>({
-    resolver: zodResolver(validationSchema),
+  } = useForm<SignInFormSchema>({
+    resolver: zodResolver(signInValidationSchema),
   })
 
-  const onSubmit = (data: FormSchema) => onSignIn(data)
+  const onSubmit = (data: SignInFormSchema) => onSignIn(data)
   function handlePressVisiblePassword() {
     setShouldHidePassword((prev) => !prev)
   }
@@ -126,10 +114,10 @@ export function SignInForm({ onSignIn }: SignInFormProps) {
       >
         <TouchableOpacity
           onPress={handleSubmit(onSubmit)}
-          disabled={isLoading}
+          disabled={isPending}
           style={styles.touchableLogin}
         >
-          {isLoading ? (
+          {isPending ? (
             <ActivityIndicator size={18} />
           ) : (
             <Typography text="Log in" style={styles.textLoginButton} />
