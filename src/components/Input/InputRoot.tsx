@@ -1,12 +1,17 @@
 import { ReactNode } from 'react'
-import { View } from 'react-native'
+import { View, ViewProps } from 'react-native'
 
 import { styles } from './input.styles'
 
-interface IInputRootProps {
+interface IInputRootProps extends ViewProps {
   children: ReactNode
+  style?: ViewProps['style']
 }
 
-export function InputRoot({ children }: IInputRootProps) {
-  return <View style={styles.container}>{children}</View>
+export function InputRoot({ children, style, ...rest }: IInputRootProps) {
+  return (
+    <View style={[styles.container, style]} {...rest}>
+      {children}
+    </View>
+  )
 }
