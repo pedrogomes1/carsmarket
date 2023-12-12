@@ -120,7 +120,11 @@ export function SignInForm({ onSignIn, isPending }: SignInFormProps) {
           {isPending ? (
             <ActivityIndicator size={18} />
           ) : (
-            <Typography text="Log in" style={styles.textLoginButton} />
+            <Typography
+              text="Log in"
+              weight="semiBold"
+              style={styles.textLoginButton}
+            />
           )}
         </TouchableOpacity>
       </LinearGradient>
