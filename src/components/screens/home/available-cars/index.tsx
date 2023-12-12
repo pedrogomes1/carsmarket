@@ -1,10 +1,11 @@
-import { ScrollView, View, Image } from 'react-native'
+import { ScrollView, View, Image, Pressable } from 'react-native'
+import { router } from 'expo-router'
 
 import { Typography } from '@/components/ui/typography'
 import Icon from '@expo/vector-icons/AntDesign'
 
 import { formatCurrency } from '@/utils/formatCurrency'
-import { Advertisements } from '@/hooks/useAvailableCars'
+import { Advertisement, Advertisements } from '@/hooks/useAvailableCars'
 
 import { colors, spacing } from '@/styles/theme'
 import { styles } from './available-cars.style'
@@ -13,19 +14,42 @@ interface AvailableCarsProps {
   advertisements?: Advertisements['advertisements']
 }
 
+export type ParamList = {
+  Entry: { nth_visitor: number }
+  Greet: { message: string }
+}
+
 export function AvailableCars({ advertisements }: AvailableCarsProps) {
+  function handleNavigateToAdvertisementsDetail(advertisement: Advertisement) {
+    const {
+      picture,
+      description,
+      model,
+      brand: { logo },
+      value,
+    } = advertisement
+    router.push({
+      pathname: '/(auth)/advertisements-details',
+      params: { picture, description, model, logo, value },
+    } as never)
+  }
+
   return (
     <ScrollView style={styles.container}>
       <Typography text="Available cars" weight="bold" style={styles.title} />
-      {advertisements?.map((advertisements) => (
-        <View key={advertisements.id} style={styles.containerCar}>
+      {advertisements?.map((advertisement) => (
+        <Pressable
+          key={advertisement.id}
+          onPress={() => handleNavigateToAdvertisementsDetail(advertisement)}
+          style={styles.containerCar}
+        >
           <Image
-            alt={`${advertisements.model} car picture`}
-            source={{ uri: advertisements.picture }}
+            alt={`${advertisement.model} car picture`}
+            source={{ uri: advertisement.picture }}
             style={styles.image}
           />
           <Typography
-            text={advertisements.model}
+            text={advertisement.model}
             weight="bold"
             style={styles.name}
           />
@@ -43,12 +67,12 @@ export function AvailableCars({ advertisements }: AvailableCarsProps) {
               style={styles.review}
             />
             <Typography
-              text={formatCurrency(advertisements.value)}
+              text={formatCurrency(advertisement.value)}
               weight="bold"
               style={styles.price}
             />
           </View>
-        </View>
+        </Pressable>
       ))}
     </ScrollView>
   )
