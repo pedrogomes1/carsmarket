@@ -13,6 +13,7 @@ const theme = {
     gray_500: '#d8d8d833',
     gray_700: '#d8d8d80d',
 
+    green: '#25d366',
     yellow: '#EFAC4E',
     red: '#c53030',
 
