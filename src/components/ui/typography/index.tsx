@@ -3,7 +3,7 @@ import { fonts } from '@/styles/theme'
 
 type FontKeys = keyof typeof fonts
 
-interface ITextProps extends TextProps {
+export interface TypographyProps extends TextProps {
   text: string
   weight?: FontKeys
   style?: TextStyle | TextStyle[]
@@ -15,7 +15,7 @@ export function Typography({
   color = '#fff',
   weight = 'regular',
   style,
-}: ITextProps) {
+}: TypographyProps) {
   return (
     <Text style={[{ color, fontFamily: fonts[weight] }, style]}>{text}</Text>
   )
