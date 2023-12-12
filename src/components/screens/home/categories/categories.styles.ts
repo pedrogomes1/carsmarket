@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   list: {
     marginHorizontal: spacing[20],
   },
-  itens: {
+  items: {
     gap: spacing[16],
   },
   item: {
