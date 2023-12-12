@@ -1,54 +1,45 @@
 import React, { useState } from 'react'
-import { FlatList, TouchableOpacity } from 'react-native'
-import { styles } from './categories.styles'
+import { FlatList, TouchableOpacity, Image } from 'react-native'
+
 import { Typography } from '@/components/ui/typography'
+import { useBrand } from '@/hooks/useBrand'
 
-import CategoryIcon from '@/assets/bmw.svg'
+import { styles } from './categories.styles'
 
-type ItemData = {
+interface ItemData {
   id: string
   title: string
+  logo: string
 }
-
-const DATA: ItemData[] = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'BMW',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'BMW',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'BMW',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d76',
-    title: 'BMW',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d744',
-    title: 'BMW',
-  },
-]
 
 export const Categories = () => {
   const [selectedId, setSelectedId] = useState<string>()
 
+  const { data } = useBrand()
+
+  const brands = data?.brands.map((brand) => ({
+    id: brand.id,
+    title: brand.name,
+    logo: brand.logo,
+  }))
+
   return (
     <FlatList
-      data={DATA}
+      data={brands}
       style={styles.list}
       renderItem={({ item }: { item: ItemData }) => {
         return (
           <TouchableOpacity onPress={() => {}} style={styles.item}>
-            <CategoryIcon />
+            <Image
+              alt={`${item.title} brand`}
+              source={{ uri: item.logo }}
+              style={styles.image}
+            />
             <Typography text={item.title} />
           </TouchableOpacity>
         )
       }}
-      contentContainerStyle={styles.itens}
+      contentContainerStyle={styles.items}
       keyExtractor={(item) => item.id}
       extraData={selectedId}
       horizontal
