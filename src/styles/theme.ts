@@ -34,6 +34,7 @@ const theme = {
     60: 60,
   },
   radius: {
+    5: 5,
     10: 10,
   },
   fontSize: {
