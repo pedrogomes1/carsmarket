@@ -1,11 +1,13 @@
-import { ReactNode, createContext, useEffect } from 'react'
-
-import { useProtectedRouter } from '../hooks/useProtectedRouter'
+import { ReactNode, createContext, useEffect, useState } from 'react'
+import * as SecureStore from 'expo-secure-store'
 import { router } from 'expo-router'
-import { useToken } from '@/hooks/useToken'
-import { useSecureStore } from '@/hooks/useSecureStore'
+
 import { User, useUser } from '@/hooks/useUser'
+import { useProtectedRouter } from '../hooks/useProtectedRouter'
+import { api } from '../libs/api'
 import { useSignIn } from '@/hooks/useSignIn'
+
+const AUTH_KEY = 'router-manager-token'
 
 type AuthContextData = {
   user: User | null
@@ -21,33 +23,43 @@ type AuthProviderProps = {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const { userToken, resetToken, updateToken } = useToken()
-  const { getSecureStore, deleteSecureStore } = useSecureStore()
-  const { user, setUser, getUser } = useUser()
+  const [userToken, setUserToken] = useState('')
+  const { user, refetchUserMe } = useUser()
   const { signIn: signInUser, isPending } = useSignIn()
 
   useProtectedRouter(userToken)
 
   useEffect(() => {
     async function loadUser() {
-      const storageToken = await getSecureStore()
+      const storageToken = await SecureStore.getItemAsync(AUTH_KEY)
       if (storageToken) {
         updateToken(storageToken)
-        await getUser()
+        refetchUserMe()
       }
     }
 
     loadUser()
   }, [])
 
+  function updateToken(token: string) {
+    setUserToken(token)
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+  }
+
   async function signIn(email: string, password: string) {
-    signInUser({ email, password })
+    try {
+      const token = await signInUser({ email, password })
+      updateToken(token)
+      await SecureStore.setItemAsync(AUTH_KEY, token)
+      await refetchUserMe()
+    } catch (error) {
+      throw error
+    }
   }
 
   async function signOut() {
-    await deleteSecureStore()
-    resetToken()
-    setUser(null)
+    await SecureStore.deleteItemAsync(AUTH_KEY)
+    setUserToken('')
     router.replace('/sign-in')
   }
 
