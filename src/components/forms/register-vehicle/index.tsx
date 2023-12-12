@@ -46,6 +46,7 @@ export function RegisterVehicleForm({
     control,
     setValue,
     reset,
+    clearErrors,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
   } = useForm<RegisterVehicleFormSchema>({
@@ -54,7 +55,10 @@ export function RegisterVehicleForm({
 
   const onSubmit = (data: RegisterVehicleFormData) => {
     onRegister(data)
-    if (isSubmitSuccessful) reset()
+    if (isSubmitSuccessful) {
+      reset()
+      setValue('picture', '')
+    }
   }
 
   async function openImagePicker() {
@@ -66,6 +70,7 @@ export function RegisterVehicleForm({
       if (result.assets?.[0]) {
         setPreview(result.assets[0].uri)
         setValue('picture', result.assets[0].uri)
+        clearErrors('picture')
       }
     } catch (err) {
       throw err
@@ -266,7 +271,10 @@ export function RegisterVehicleForm({
           <View style={styles.containerPreview}>
             <TouchableOpacity
               style={styles.buttonDeletePreview}
-              onPress={() => setPreview(null)}
+              onPress={() => {
+                setPreview(null)
+                setValue('picture', '', { shouldValidate: true })
+              }}
             >
               <FeatherIcon name="trash-2" size={22} color={colors.red} />
             </TouchableOpacity>
@@ -283,6 +291,12 @@ export function RegisterVehicleForm({
           </View>
         )}
       </TouchableOpacity>
+      {errors.picture && (
+        <Typography
+          text={errors.picture.message!}
+          style={styles.textValidation}
+        />
+      )}
 
       <Button.Gradient
         colors={[colors.purple, colors.blue_200]}
