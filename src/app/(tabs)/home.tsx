@@ -34,7 +34,7 @@ export default function Home() {
             style={styles.searchTitle}
           />
 
-          <Input.Root>
+          <Input.Root style={styles.rootInput}>
             <Input.Icon icon={SEARCH_ICON} />
             <Input.Text
               placeholder="Search"

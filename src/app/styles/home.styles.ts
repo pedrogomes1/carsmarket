@@ -9,10 +9,12 @@ export const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
+  rootInput: {
+    marginTop: spacing[20],
+  },
   containerSearchTitle: {
     marginTop: spacing[32],
-    marginRight: spacing[20],
-    marginLeft: spacing[20],
+    marginHorizontal: spacing[20],
   },
   searchTitle: {
     fontSize: spacing[20],
