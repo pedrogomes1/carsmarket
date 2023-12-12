@@ -25,7 +25,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="register"
+        name="register-vehicle"
         options={{
           tabBarIcon: ({ size }) => (
             <Icon name="plus" color={colors.blue_300} size={size} />
