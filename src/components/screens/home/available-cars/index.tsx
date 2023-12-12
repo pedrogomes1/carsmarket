@@ -1,25 +1,38 @@
-import { ScrollView, View } from 'react-native'
+import { ScrollView, View, Image } from 'react-native'
 
 import { Typography } from '@/components/ui/typography'
 import Icon from '@expo/vector-icons/AntDesign'
 
-import CarIcon from '@/assets/car.svg'
+import { formatCurrency } from '@/utils/formatCurrency'
+import { Advertisements } from '@/hooks/useAvailableCars'
 
-import { colors } from '@/styles/theme'
+import { colors, spacing } from '@/styles/theme'
 import { styles } from './available-cars.style'
 
-export function AvailableCars() {
+interface AvailableCarsProps {
+  advertisements?: Advertisements['advertisements']
+}
+
+export function AvailableCars({ advertisements }: AvailableCarsProps) {
   return (
     <ScrollView style={styles.container}>
       <Typography text="Available cars" weight="bold" style={styles.title} />
-      {[0, 1, 2].map((car) => (
-        <View key={car} style={styles.containerCar}>
-          <CarIcon />
-          <Typography text="Jaguar F Pace" weight="bold" style={styles.name} />
+      {advertisements?.map((advertisements) => (
+        <View key={advertisements.id} style={styles.containerCar}>
+          <Image
+            alt={`${advertisements.model} car picture`}
+            source={{ uri: advertisements.picture }}
+            style={styles.image}
+          />
+          <Typography
+            text={advertisements.model}
+            weight="bold"
+            style={styles.name}
+          />
           <View style={styles.containerRating}>
             <Icon
               name="staro"
-              size={18}
+              size={spacing[20]}
               color={colors.yellow}
               style={styles.starIcon}
             />
@@ -29,7 +42,11 @@ export function AvailableCars() {
               weight="medium"
               style={styles.review}
             />
-            <Typography text="$540.000" weight="bold" style={styles.price} />
+            <Typography
+              text={formatCurrency(advertisements.value)}
+              weight="bold"
+              style={styles.price}
+            />
           </View>
         </View>
       ))}

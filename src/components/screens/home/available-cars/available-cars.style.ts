@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.lg,
   },
+  image: {
+    width: '100%',
+    height: 150,
+    objectFit: 'cover',
+    zIndex: 1,
+  },
   containerCar: {
     marginTop: spacing[20],
     paddingHorizontal: spacing[20],

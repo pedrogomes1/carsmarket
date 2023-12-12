@@ -1,4 +1,9 @@
-import { View, ImageBackground, ScrollView } from 'react-native'
+import {
+  View,
+  ImageBackground,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native'
 import SearchIcon from '@expo/vector-icons/AntDesign'
 
 import { Header } from '@/components/ui/header'
@@ -6,6 +11,7 @@ import { Typography } from '@/components/ui/typography'
 import { Input } from '@/components/ui/input'
 import { Categories } from '@/components/screens/home/categories'
 import { AvailableCars } from '@/components/screens/home/available-cars'
+import { useAvailableCars } from '@/hooks/useAvailableCars'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'
@@ -16,6 +22,8 @@ const SEARCH_ICON = (
 )
 
 export default function Home() {
+  const { data, isPending } = useAvailableCars()
+
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
       <ScrollView>
@@ -47,7 +55,11 @@ export default function Home() {
 
         <Categories />
 
-        <AvailableCars />
+        {isPending ? (
+          <ActivityIndicator size={18} />
+        ) : (
+          <AvailableCars advertisements={data} />
+        )}
       </ScrollView>
     </ImageBackground>
   )
