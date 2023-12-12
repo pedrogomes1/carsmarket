@@ -1,4 +1,5 @@
-import { ScrollView, ImageBackground } from 'react-native'
+import { router } from 'expo-router'
+import { ScrollView, ImageBackground, Pressable } from 'react-native'
 import Icon from '@expo/vector-icons/Ionicons'
 
 import {
@@ -28,12 +29,14 @@ export default function RegisterVehicle() {
   return (
     <ImageBackground source={blurBg} style={styles.background}>
       <ScrollView style={styles.container}>
-        <Icon
-          name="arrow-back"
-          size={24}
-          color={colors.gray_400}
-          style={styles.arrow}
-        />
+        <Pressable onPress={() => router.replace('/home')}>
+          <Icon
+            name="arrow-back"
+            size={24}
+            color={colors.gray_400}
+            style={styles.arrow}
+          />
+        </Pressable>
 
         <RegisterVehicleForm
           onRegister={handleRegisterNewVehicle}
