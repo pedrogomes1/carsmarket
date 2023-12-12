@@ -45,7 +45,7 @@ export default function Home() {
           <Input.Root style={styles.rootInput}>
             <Input.Icon icon={SEARCH_ICON} />
             <Input.Text
-              placeholder="Search"
+              placeholder="Search by model"
               autoCapitalize="none"
               inputMode="search"
               placeholderTextColor={colors.gray_400}
