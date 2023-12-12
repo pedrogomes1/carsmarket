@@ -2,16 +2,20 @@ import { useQuery } from '@tanstack/react-query'
 
 import { api } from '@/libs/api'
 
-export interface Advertisements {
-  advertisements: {
-    id: string
-    picture: string
+export interface Advertisement {
+  id: string
+  picture: string
+  description: string
+  model: string
+  year: string
+  value: number
+  city: string
+  brand: {
     logo: string
-    description: string
-    model: string
-    year: string
-    value: number
-  }[]
+  }
+}
+export interface Advertisements {
+  advertisements: Advertisement[]
 }
 
 async function fetchAdvertisements(): Promise<Advertisements> {
