@@ -14,19 +14,19 @@ export const styles = StyleSheet.create({
     marginHorizontal: spacing[20],
   },
   containerHeader: {
-    alignItems: 'center',
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginTop: spacing[12],
   },
   containerLocation: {
     flexDirection: 'row',
-    marginLeft: 'auto',
     alignItems: 'center',
     gap: spacing[4],
+    marginTop: spacing[12],
   },
   title: {
     fontSize: fontSize.xl,
-    marginTop: spacing[12],
   },
   subtitle: {
     fontSize: fontSize.sm,
@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
   },
   picture: {
     marginTop: spacing[20],
+    marginBottom: spacing[12],
     width: '100%',
     height: 200,
     objectFit: 'cover',
