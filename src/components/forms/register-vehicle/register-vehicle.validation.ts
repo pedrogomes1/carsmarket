@@ -1,6 +1,5 @@
+import { transformCurrencyToNumber } from '@/utils/transformCurrencyToNumber'
 import { z } from 'zod'
-
-const regexRemoveCharacters = /[^0-9.-]+/g
 
 export const RegisterVehicleValidationSchema = z.object({
   description: z
@@ -17,17 +16,20 @@ export const RegisterVehicleValidationSchema = z.object({
     .min(1, 'Model is mandatory'),
   year: z
     .string({ required_error: 'Year is mandatory' })
-    .min(1, 'Year is mandatory'),
+    .min(1, 'Year is mandatory')
+    .transform((value) => {
+      return Number(value)
+    }),
   value: z
     .string({ required_error: 'Value is mandatory' })
     .refine(
       (value) => {
-        return value?.replace(regexRemoveCharacters, '')
+        return !!transformCurrencyToNumber(value)
       },
       { message: 'Value is mandatory' },
     )
     .transform((value) => {
-      return Number(value.replace(regexRemoveCharacters, ''))
+      return transformCurrencyToNumber(value)
     }),
   city: z
     .string({ required_error: 'City is mandatory' })
