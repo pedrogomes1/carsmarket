@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { FlatList, TouchableOpacity, Image } from 'react-native'
+import { FlatList, Pressable, Image } from 'react-native'
 
 import { Typography } from '@/components/ui/typography'
 import { useBrand } from '@/hooks/useBrand'
 
-import { styles } from './categories.styles'
+import { styles } from './brands.styles'
 
 interface ItemData {
   id: string
@@ -12,8 +12,12 @@ interface ItemData {
   logo: string
 }
 
-export const Categories = () => {
-  const [selectedId, setSelectedId] = useState<string>()
+interface BransProps {
+  onFilterByBrand: (id: string) => void
+}
+
+export const Brands = ({ onFilterByBrand }: BransProps) => {
+  const [selectedId, setSelectedId] = useState<string>('')
 
   const { data } = useBrand()
 
@@ -23,20 +27,29 @@ export const Categories = () => {
     logo: brand.logo,
   }))
 
+  function handleBrandPress(id: string) {
+    setSelectedId(id === selectedId ? '' : id)
+    onFilterByBrand(id === selectedId ? '' : id)
+  }
+
   return (
     <FlatList
       data={brands}
       style={styles.list}
       renderItem={({ item }: { item: ItemData }) => {
+        const isSelected = selectedId === item.id
         return (
-          <TouchableOpacity onPress={() => {}} style={styles.item}>
+          <Pressable
+            onPress={() => handleBrandPress(item.id)}
+            style={[styles.item, isSelected ? styles.selected : null]}
+          >
             <Image
               alt={`${item.title} brand`}
               source={{ uri: item.logo }}
               style={styles.image}
             />
             <Typography text={item.title} />
-          </TouchableOpacity>
+          </Pressable>
         )
       }}
       contentContainerStyle={styles.items}

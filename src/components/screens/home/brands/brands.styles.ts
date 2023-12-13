@@ -23,6 +23,10 @@ export const styles = StyleSheet.create({
     marginTop: spacing[20],
     backgroundColor: colors.gray_700,
   },
+  selected: {
+    borderColor: colors.gray_100,
+    borderWidth: 2,
+  },
   image: {
     width: IMAGE_SIZE,
     height: IMAGE_SIZE,
