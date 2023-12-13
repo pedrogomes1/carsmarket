@@ -11,6 +11,7 @@ export interface Advertisement {
   value: number
   city: string
   brand: {
+    id: string
     logo: string
   }
 }
