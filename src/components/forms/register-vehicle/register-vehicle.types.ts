@@ -3,7 +3,7 @@ export type RegisterVehicleFormData = {
   brand: string
   model: string
   picture: string
-  year: string
+  year: number
   value: number
   city: string
 }
