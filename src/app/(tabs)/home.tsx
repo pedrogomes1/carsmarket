@@ -5,12 +5,12 @@ import {
   ActivityIndicator,
   ScrollView,
 } from 'react-native'
-import SearchIcon from '@expo/vector-icons/AntDesign'
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { Header } from '@/components/ui/header'
 import { Typography } from '@/components/ui/typography'
 import { Input } from '@/components/ui/input'
-import { Categories } from '@/components/screens/home/categories'
+import { Brands } from '@/components/screens/home/brands'
 import { AvailableCars } from '@/components/screens/home/available-cars'
 import { Advertisement, useAvailableCars } from '@/hooks/useAvailableCars'
 
@@ -19,25 +19,45 @@ import { colors } from '@/styles/theme'
 import { styles } from '../styles/home.styles'
 
 const SEARCH_ICON = (
-  <SearchIcon name="search1" size={24} color={colors.gray_400} />
+  <AntDesign name="search1" size={24} color={colors.gray_400} />
 )
 
 export default function Home() {
-  const [searchedAdvertisements, setSearchedAdvertisements] =
+  const [filteredAdvertisements, setFilteredAdvertisements] =
     useState<Advertisement[]>()
+
+  const [isFiltering, setIsFiltering] = useState(false)
 
   const { data: advertisements, isPending } = useAvailableCars()
 
   function handleFilterByModel(text: string) {
+    if (!text) return setIsFiltering(false)
+    setIsFiltering(true)
+
     const searchText = text.toLowerCase()
 
     const newAdvertisements = advertisements?.filter(({ model }) =>
       model.toLowerCase().includes(searchText),
     )
-    setSearchedAdvertisements(newAdvertisements)
+    setFilteredAdvertisements(newAdvertisements)
   }
 
-  const hasSearch = searchedAdvertisements?.length
+  function handleFilterByBrand(brandId: string) {
+    if (!brandId) return setIsFiltering(false)
+    setIsFiltering(true)
+
+    const newAdvertisements = advertisements?.filter(
+      ({ brand }) => brand.id === brandId,
+    )
+
+    setFilteredAdvertisements(newAdvertisements)
+  }
+
+  const advertisementsData = isFiltering
+    ? filteredAdvertisements
+    : advertisements
+
+  if (isPending) return <ActivityIndicator size={18} />
 
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
@@ -69,14 +89,22 @@ export default function Home() {
           </Input.Root>
         </View>
 
-        <Categories />
+        <Brands onFilterByBrand={handleFilterByBrand} />
 
-        {isPending ? (
-          <ActivityIndicator size={18} />
+        {advertisementsData?.length ? (
+          <AvailableCars advertisements={advertisementsData} />
         ) : (
-          <AvailableCars
-            advertisements={hasSearch ? searchedAdvertisements : advertisements}
-          />
+          <View style={styles.containerFilterNotFound}>
+            <MaterialCommunityIcons
+              color={colors.white}
+              size={40}
+              name="filter-remove-outline"
+            />
+            <Typography
+              text="No advertisements found by this filter."
+              style={styles.notFoundText}
+            />
+          </View>
         )}
       </ScrollView>
     </ImageBackground>
