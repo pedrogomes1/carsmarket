@@ -34,7 +34,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const storageToken = await SecureStore.getItemAsync(AUTH_KEY)
       if (storageToken) {
         updateToken(storageToken)
-        refetchUserMe()
+        await refetchUserMe()
       }
     }
 
