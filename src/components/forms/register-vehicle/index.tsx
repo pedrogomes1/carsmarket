@@ -191,7 +191,7 @@ export function RegisterVehicleForm({
                   onBlur={onBlur}
                   onChangeText={onChange}
                   keyboardType="numeric"
-                  value={value?.replace(/[^0-9]/g, '')}
+                  value={String(value)?.replace(/[^0-9]/g, '')}
                 />
               </Input.Root>
               {errors.year && (
