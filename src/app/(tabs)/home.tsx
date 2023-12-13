@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   View,
   ImageBackground,
@@ -11,7 +12,7 @@ import { Typography } from '@/components/ui/typography'
 import { Input } from '@/components/ui/input'
 import { Categories } from '@/components/screens/home/categories'
 import { AvailableCars } from '@/components/screens/home/available-cars'
-import { useAvailableCars } from '@/hooks/useAvailableCars'
+import { Advertisement, useAvailableCars } from '@/hooks/useAvailableCars'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'
@@ -22,7 +23,21 @@ const SEARCH_ICON = (
 )
 
 export default function Home() {
-  const { data, isPending } = useAvailableCars()
+  const [searchedAdvertisements, setSearchedAdvertisements] =
+    useState<Advertisement[]>()
+
+  const { data: advertisements, isPending } = useAvailableCars()
+
+  function handleFilterByModel(text: string) {
+    const searchText = text.toLowerCase()
+
+    const newAdvertisements = advertisements?.filter(({ model }) =>
+      model.toLowerCase().includes(searchText),
+    )
+    setSearchedAdvertisements(newAdvertisements)
+  }
+
+  const hasSearch = searchedAdvertisements?.length
 
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
@@ -49,6 +64,7 @@ export default function Home() {
               autoCapitalize="none"
               inputMode="search"
               placeholderTextColor={colors.gray_400}
+              onChangeText={handleFilterByModel}
             />
           </Input.Root>
         </View>
@@ -58,7 +74,9 @@ export default function Home() {
         {isPending ? (
           <ActivityIndicator size={18} />
         ) : (
-          <AvailableCars advertisements={data} />
+          <AvailableCars
+            advertisements={hasSearch ? searchedAdvertisements : advertisements}
+          />
         )}
       </ScrollView>
     </ImageBackground>
