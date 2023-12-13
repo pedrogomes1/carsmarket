@@ -13,6 +13,17 @@ export const styles = StyleSheet.create({
     marginTop: spacing[60],
     marginHorizontal: spacing[20],
   },
+  containerHeader: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: spacing[12],
+  },
+  containerLocation: {
+    flexDirection: 'row',
+    marginLeft: 'auto',
+    alignItems: 'center',
+    gap: spacing[4],
+  },
   title: {
     fontSize: fontSize.xl,
     marginTop: spacing[12],
@@ -25,7 +36,6 @@ export const styles = StyleSheet.create({
   containerRating: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: spacing[12],
     gap: spacing[4],
   },
   review: {

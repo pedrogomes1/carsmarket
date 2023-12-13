@@ -25,9 +25,8 @@ type SearchParamType = {
 }
 
 export default function AdvertisementsDetails() {
-  const { description, model, picture, logo, value } = useLocalSearchParams<
-    SearchParamType & { [key: string]: string }
-  >()
+  const { description, model, picture, logo, value, city } =
+    useLocalSearchParams<SearchParamType & { [key: string]: string }>()
 
   return (
     <ImageBackground source={blurBg} style={styles.background}>
@@ -37,23 +36,29 @@ export default function AdvertisementsDetails() {
         </Pressable>
         <Typography text={model} weight="bold" style={styles.title} />
 
-        <View style={styles.containerRating}>
-          <AntDesign
-            name="staro"
-            size={spacing[24]}
-            color={colors.yellow}
-            style={styles.starIcon}
-          />
-          <Typography
-            text="4.9"
-            weight="extraBold"
-            style={styles.ratingNumber}
-          />
-          <Typography
-            text="(120 Reviews)"
-            weight="medium"
-            style={styles.review}
-          />
+        <View style={styles.containerHeader}>
+          <View style={styles.containerRating}>
+            <AntDesign
+              name="staro"
+              size={spacing[24]}
+              color={colors.yellow}
+              style={styles.starIcon}
+            />
+            <Typography
+              text="4.9"
+              weight="extraBold"
+              style={styles.ratingNumber}
+            />
+            <Typography
+              text="(120 Reviews)"
+              weight="medium"
+              style={styles.review}
+            />
+          </View>
+          <View style={styles.containerLocation}>
+            <Ionicons name="location-sharp" size={20} color={colors.blue_300} />
+            <Typography text={city} weight="semiBold" />
+          </View>
         </View>
 
         <Image

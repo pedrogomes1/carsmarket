@@ -27,10 +27,11 @@ export function AvailableCars({ advertisements }: AvailableCarsProps) {
       model,
       brand: { logo },
       value,
+      city,
     } = advertisement
     router.push({
       pathname: '/(auth)/advertisements-details',
-      params: { picture, description, model, logo, value },
+      params: { picture, description, model, logo, value, city },
     } as never)
   }
 
