@@ -19,4 +19,13 @@ export const styles = StyleSheet.create({
   searchTitle: {
     fontSize: spacing[20],
   },
+  containerFilterNotFound: {
+    marginTop: spacing[60],
+    gap: spacing[12],
+    alignItems: 'center',
+  },
+  notFoundText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
 })
