@@ -12,7 +12,7 @@ export function Header() {
   const { signOut, user } = useAuth()
   return (
     <View style={styles.container}>
-      <Avatar />
+      <Avatar avatar={user!.photo} />
       <View style={styles.containerProfile}>
         <Typography text="Welcome," />
         <Typography
