@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { View, TouchableOpacity } from 'react-native'
 import Icon from '@expo/vector-icons/MaterialIcons'
 
@@ -8,7 +9,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { styles } from './header.styles'
 import { colors } from '@/styles/theme'
 
-export function Header() {
+export const Header = memo(function Header() {
   const { signOut, user } = useAuth()
   return (
     <View style={styles.container}>
@@ -26,4 +27,4 @@ export function Header() {
       </TouchableOpacity>
     </View>
   )
-}
+})
