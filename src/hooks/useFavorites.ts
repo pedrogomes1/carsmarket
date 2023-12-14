@@ -4,7 +4,7 @@ import { useToast } from 'react-native-toast-notifications'
 import { api } from '@/libs/api'
 
 interface FavoriteProps {
-  id: string
+  id?: string
   advertisementId: string
 }
 

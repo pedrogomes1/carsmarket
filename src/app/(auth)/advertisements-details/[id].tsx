@@ -23,7 +23,7 @@ import { useFavorites } from '@/hooks/useFavorites'
 export default function AdvertisementsDetails() {
   const { id } = useLocalSearchParams()
 
-  const { data, isPending } = useAdvertisementsDetails(id as string)
+  const { data, isPending, refetch } = useAdvertisementsDetails(id as string)
   const { setFavorite, data: isFavorite } = useFavorites()
 
   if (!data || isPending) {
@@ -31,13 +31,17 @@ export default function AdvertisementsDetails() {
   }
 
   async function updateFavorite() {
+    const favoritePressedId = data?.favorites[0]?.id || undefined
     try {
-      await setFavorite({ id: id as string, advertisementId: data!.id })
+      await setFavorite({
+        id: favoritePressedId,
+        advertisementId: data!.id,
+      })
+      await refetch()
     } catch (error) {
       throw error
     }
   }
-
   const isFavoriteAdvertisement = isFavorite || data.favorites?.[0]?.isFavorite
 
   return (

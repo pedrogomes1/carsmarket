@@ -18,6 +18,7 @@ export interface Advertisement {
     {
       id: string
       isFavorite: boolean
+      advertisementId: string
     },
   ]
 }
@@ -31,10 +32,10 @@ async function fetchAdvertisementsDetails(id: string): Promise<Advertisements> {
 }
 
 export function useAdvertisementsDetails(id: string) {
-  const { data, isError, isPending } = useQuery({
+  const { data, isError, isPending, refetch } = useQuery({
     queryKey: ['advertisementsList'],
     queryFn: () => fetchAdvertisementsDetails(id),
   })
 
-  return { data: data?.advertisements, isPending, isError }
+  return { data: data?.advertisements, isPending, isError, refetch }
 }
