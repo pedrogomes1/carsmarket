@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     borderColor: colors.white,
   },
-  separatorText: {
+  text: {
     fontSize: fontSize.sm,
   },
   googleButton: {
@@ -54,5 +54,9 @@ export const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
     fontSize: fontSize.sm,
+  },
+  containerBaseboard: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 })

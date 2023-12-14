@@ -1,14 +1,14 @@
-import { TouchableOpacity, View, ImageBackground } from 'react-native'
+import { View, ImageBackground } from 'react-native'
+import { Link } from 'expo-router'
 
-import { Typography } from '@/components/ui/typography'
 import { useAuth } from '@/hooks/useAuth'
+import { Typography } from '@/components/ui/typography'
+import { SignInFormSchema, SignInForm } from '@/components/forms/sign-in'
 
 import logo from '@/assets/logo.png'
-import GoogleIcon from '@/assets/google.svg'
 
 import { styles } from '../styles/sign-in.styles'
 import { colors } from '@/styles/theme'
-import { SignInFormSchema, SignInForm } from '@/components/forms/sign-in'
 
 export default function SignIn() {
   const { signIn, isPending } = useAuth()
@@ -22,27 +22,29 @@ export default function SignIn() {
       <ImageBackground source={logo} style={styles.logoImage} />
       <Typography text="Welcome Back" weight="bold" style={styles.title} />
       <Typography
-        text="Log in to your account using email or social networks"
+        text="Log in to your account using your email"
         color={colors.gray_100}
         style={styles.subtitle}
       />
 
       <SignInForm onSignIn={handleSignIn} isPending={isPending} />
 
-      <View style={styles.separatorContainer}>
-        <View style={styles.separator} />
+      <View style={styles.containerBaseboard}>
         <Typography
-          text="Or sign in with"
-          weight="bold"
-          style={styles.separatorText}
+          text="First time here?"
+          weight="medium"
+          style={styles.text}
         />
-        <View style={styles.separator} />
-      </View>
 
-      <TouchableOpacity style={styles.googleButton}>
-        <GoogleIcon />
-        <Typography style={styles.googleText} text="Google" />
-      </TouchableOpacity>
+        <Link href="/(auth)/sign-up">
+          <Typography
+            text=" Sign up"
+            weight="medium"
+            style={styles.text}
+            color={colors.blue_300}
+          />
+        </Link>
+      </View>
     </View>
   )
 }
