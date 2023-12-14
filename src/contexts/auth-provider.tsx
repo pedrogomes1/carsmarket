@@ -1,13 +1,26 @@
-import { ReactNode, createContext, useEffect, useState } from 'react'
+import {
+  ReactNode,
+  useCallback,
+  createContext,
+  useEffect,
+  useState,
+} from 'react'
 import * as SecureStore from 'expo-secure-store'
 import { router } from 'expo-router'
 
-import { User, useUser } from '@/hooks/useUser'
 import { useProtectedRouter } from '../hooks/useProtectedRouter'
 import { api } from '../libs/api'
 import { useSignIn } from '@/hooks/useSignIn'
 
-const AUTH_KEY = 'router-manager-token'
+export const AUTH_KEY = 'router-manager-token'
+export const USER_KEY = 'user-manager-token'
+
+export type User = {
+  id: string
+  name: string
+  email: string
+  photo: string
+}
 
 type AuthContextData = {
   user: User | null
@@ -24,22 +37,23 @@ type AuthProviderProps = {
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [userToken, setUserToken] = useState('')
-  const { user, refetchUserMe } = useUser()
   const { signIn: signInUser, isPending } = useSignIn()
+  const [user, setUser] = useState<User | null>(null)
 
   useProtectedRouter(userToken)
 
-  useEffect(() => {
-    async function loadUser() {
-      const storageToken = await SecureStore.getItemAsync(AUTH_KEY)
-      if (storageToken) {
-        updateToken(storageToken)
-        await refetchUserMe()
-      }
+  const loadUser = useCallback(async () => {
+    const storageToken = await SecureStore.getItemAsync(AUTH_KEY)
+    if (storageToken) {
+      updateToken(storageToken)
     }
-
-    loadUser()
+    const storageUser = await SecureStore.getItemAsync(USER_KEY)
+    if (storageUser) setUser(JSON.parse(storageUser))
   }, [])
+
+  useEffect(() => {
+    loadUser()
+  }, [loadUser])
 
   function updateToken(token: string) {
     setUserToken(token)
@@ -48,10 +62,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn(email: string, password: string) {
     try {
-      const token = await signInUser({ email, password })
-      updateToken(token)
-      await SecureStore.setItemAsync(AUTH_KEY, token)
-      await refetchUserMe()
+      const { data } = await signInUser({ email, password })
+      updateToken(data.token)
+      await SecureStore.setItemAsync(AUTH_KEY, data.token)
+      await SecureStore.setItemAsync(USER_KEY, JSON.stringify(data.user))
+      loadUser()
     } catch (error) {
       throw error
     }
