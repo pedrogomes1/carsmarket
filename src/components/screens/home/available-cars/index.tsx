@@ -75,7 +75,7 @@ export function AvailableCars({ advertisements }: AvailableCarsProps) {
                   size={20}
                   color={colors.blue_300}
                 />
-                <Typography text="Rio de Janeiro" weight="semiBold" />
+                <Typography text={advertisement.city} weight="semiBold" />
               </View>
             </View>
             <Button.Touchable

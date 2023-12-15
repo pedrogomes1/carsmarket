@@ -28,4 +28,8 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
   },
+  spinner: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+  },
 })

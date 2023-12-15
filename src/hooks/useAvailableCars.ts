@@ -26,10 +26,14 @@ async function fetchAdvertisements(): Promise<Advertisements> {
 }
 
 export function useAvailableCars() {
-  const { data, isError, isPending } = useQuery({
+  const { data, isError, isFetching, isRefetching } = useQuery({
     queryKey: ['advertisementsList'],
     queryFn: fetchAdvertisements,
   })
 
-  return { data: data?.advertisements, isPending, isError }
+  return {
+    data: data?.advertisements,
+    isLoading: isFetching || isRefetching,
+    isError,
+  }
 }

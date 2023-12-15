@@ -28,7 +28,7 @@ export default function Home() {
 
   const [isFiltering, setIsFiltering] = useState(false)
 
-  const { data: advertisements, isPending } = useAvailableCars()
+  const { data: advertisements, isLoading } = useAvailableCars()
 
   function handleFilterByModel(text: string) {
     if (!text) return setIsFiltering(false)
@@ -57,56 +57,59 @@ export default function Home() {
     ? filteredAdvertisements
     : advertisements
 
-  if (isPending) return <ActivityIndicator size={18} />
+  if (isLoading) return <ActivityIndicator size={18} />
 
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
-      <ScrollView>
-        <Header />
-
-        <View style={styles.containerSearchTitle}>
-          <Typography
-            text="Select or search your"
-            weight="bold"
-            style={styles.searchTitle}
-          />
-          <Typography
-            text="Desired vehicle"
-            weight="extraBold"
-            color={colors.blue_300}
-            style={styles.searchTitle}
-          />
-
-          <Input.Root style={styles.rootInput}>
-            <Input.Icon icon={SEARCH_ICON} />
-            <Input.Text
-              placeholder="Search by model"
-              autoCapitalize="none"
-              inputMode="search"
-              placeholderTextColor={colors.gray_400}
-              onChangeText={handleFilterByModel}
-            />
-          </Input.Root>
-        </View>
-
-        <Brands onFilterByBrand={handleFilterByBrand} />
-
-        {advertisementsData?.length ? (
-          <AvailableCars advertisements={advertisementsData} />
-        ) : (
-          <View style={styles.containerFilterNotFound}>
-            <MaterialCommunityIcons
-              color={colors.white}
-              size={40}
-              name="filter-remove-outline"
+      {isLoading ? (
+        <ActivityIndicator style={styles.spinner} size="large" />
+      ) : (
+        <ScrollView>
+          <Header />
+          <View style={styles.containerSearchTitle}>
+            <Typography
+              text="Select or search your"
+              weight="bold"
+              style={styles.searchTitle}
             />
             <Typography
-              text="No advertisements found."
-              style={styles.notFoundText}
+              text="Desired vehicle"
+              weight="extraBold"
+              color={colors.blue_300}
+              style={styles.searchTitle}
             />
+
+            <Input.Root style={styles.rootInput}>
+              <Input.Icon icon={SEARCH_ICON} />
+              <Input.Text
+                placeholder="Search by model"
+                autoCapitalize="none"
+                inputMode="search"
+                placeholderTextColor={colors.gray_400}
+                onChangeText={handleFilterByModel}
+              />
+            </Input.Root>
           </View>
-        )}
-      </ScrollView>
+
+          <Brands onFilterByBrand={handleFilterByBrand} />
+
+          {advertisementsData?.length ? (
+            <AvailableCars advertisements={advertisementsData} />
+          ) : (
+            <View style={styles.containerFilterNotFound}>
+              <MaterialCommunityIcons
+                color={colors.white}
+                size={40}
+                name="filter-remove-outline"
+              />
+              <Typography
+                text="No advertisements found."
+                style={styles.notFoundText}
+              />
+            </View>
+          )}
+        </ScrollView>
+      )}
     </ImageBackground>
   )
 }

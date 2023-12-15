@@ -13,6 +13,7 @@ export interface Advertisement {
   brand: {
     id: string
     logo: string
+    name: string
   }
   favorites: [
     {
@@ -32,10 +33,15 @@ async function fetchAdvertisementsDetails(id: string): Promise<Advertisements> {
 }
 
 export function useAdvertisementsDetails(id: string) {
-  const { data, isError, isPending, refetch } = useQuery({
+  const { data, isError, isFetching, refetch } = useQuery({
     queryKey: ['advertisementsList'],
     queryFn: () => fetchAdvertisementsDetails(id),
   })
 
-  return { data: data?.advertisements, isPending, isError, refetch }
+  return {
+    data: data?.advertisements,
+    isFetching,
+    isError,
+    refetch,
+  }
 }

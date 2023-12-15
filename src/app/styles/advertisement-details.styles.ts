@@ -100,4 +100,8 @@ export const styles = StyleSheet.create({
   price: {
     fontSize: fontSize.lg,
   },
+  spinner: {
+    marginTop: 'auto',
+    marginBottom: 'auto',
+  },
 })
