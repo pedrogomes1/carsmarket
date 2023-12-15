@@ -1,37 +1,26 @@
 import { ScrollView, View, Image, Pressable } from 'react-native'
 import { router } from 'expo-router'
-
-import { Typography } from '@/components/ui/typography'
 import Icon from '@expo/vector-icons/AntDesign'
+import { Ionicons } from '@expo/vector-icons'
 
-import { formatCurrency } from '@/utils/formatCurrency'
+import { Button } from '@/components/ui/button'
+import { Typography } from '@/components/ui/typography'
+
 import { Advertisement, Advertisements } from '@/hooks/useAvailableCars'
 
-import { colors, spacing } from '@/styles/theme'
+import { colors } from '@/styles/theme'
 import { styles } from './available-cars.style'
+import { formatCurrency } from '@/utils/formatCurrency'
 
 interface AvailableCarsProps {
   advertisements?: Advertisements['advertisements']
 }
 
-export type ParamList = {
-  Entry: { nth_visitor: number }
-  Greet: { message: string }
-}
-
 export function AvailableCars({ advertisements }: AvailableCarsProps) {
-  function handleNavigateToAdvertisementsDetail(advertisement: Advertisement) {
-    const {
-      picture,
-      description,
-      model,
-      brand: { logo },
-      value,
-      city,
-    } = advertisement
-    router.push({
-      pathname: '/(auth)/advertisements-details',
-      params: { picture, description, model, logo, value, city },
+  function handleNavigateToAdvertisementsDetail({ id }: Advertisement) {
+    router.replace({
+      pathname: `/(auth)/advertisements-details/${id}`,
+      params: { id },
     } as never)
   }
 
@@ -49,29 +38,55 @@ export function AvailableCars({ advertisements }: AvailableCarsProps) {
             source={{ uri: advertisement.picture }}
             style={styles.image}
           />
-          <Typography
-            text={advertisement.model}
-            weight="bold"
-            style={styles.name}
-          />
-          <View style={styles.containerRating}>
-            <Icon
-              name="staro"
-              size={spacing[20]}
-              color={colors.yellow}
-              style={styles.starIcon}
-            />
-            <Typography text="4.9" weight="extraBold" />
-            <Typography
-              text="(120 Reviews)"
-              weight="medium"
-              style={styles.review}
-            />
-            <Typography
-              text={formatCurrency(advertisement.value)}
-              weight="bold"
-              style={styles.price}
-            />
+          <View style={styles.containerInfo}>
+            <View style={styles.containerTitle}>
+              <Image
+                alt={`${advertisement.brand.logo} car picture`}
+                source={{ uri: advertisement.brand.logo }}
+                style={styles.imageLogo}
+              />
+              <Typography
+                text={advertisement.brand.name}
+                weight="extraBold"
+                style={styles.name}
+              />
+              <Typography
+                text={advertisement.model}
+                weight="extraBold"
+                style={styles.modelText}
+              />
+              <View style={styles.containerYear}>
+                <Typography
+                  text={advertisement.year}
+                  weight="medium"
+                  style={styles.review}
+                />
+              </View>
+            </View>
+            <View style={styles.containerSubInfo}>
+              <Typography
+                text={formatCurrency(advertisement.value)}
+                weight="bold"
+                style={styles.price}
+              />
+              <View style={styles.containerLocation}>
+                <Ionicons
+                  name="location-sharp"
+                  size={20}
+                  color={colors.blue_300}
+                />
+                <Typography text="Rio de Janeiro" weight="semiBold" />
+              </View>
+            </View>
+            <Button.Touchable
+              onPress={() =>
+                handleNavigateToAdvertisementsDetail(advertisement)
+              }
+              style={styles.touchableRedirect}
+            >
+              <Button.Text text="Details" />
+              <Icon name="arrowright" size={18} color={colors.white} />
+            </Button.Touchable>
           </View>
         </Pressable>
       ))}

@@ -1,18 +1,17 @@
-import { Tabs } from 'expo-router'
+import { Tabs, usePathname } from 'expo-router'
 
 import { colors } from '@/styles/theme'
-import { useState } from 'react'
 import { Platform } from 'react-native'
 import { HomeSVG } from '@/assets/svgs/HomeIcon'
 import { RegisterSVG } from '@/assets/svgs/RegisterIcon'
 
 enum TabsName {
-  Home = 'home',
-  Register = 'register-vehicle',
+  Home = '/home',
+  Register = '/register-vehicle',
 }
 
 export default function TabsLayout() {
-  const [activeTab, setActiveTab] = useState('home')
+  const currentPathTab = usePathname()
 
   return (
     <Tabs
@@ -30,44 +29,45 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name={TabsName.Home}
+        name={'home'}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: () => {
             return (
               <HomeSVG
                 fill={
-                  activeTab === TabsName.Home ? colors.blue_100 : colors.white
+                  currentPathTab === TabsName.Home
+                    ? colors.blue_100
+                    : colors.white
                 }
               />
             )
           },
           tabBarLabelStyle: {
-            color: activeTab === TabsName.Home ? colors.blue_100 : colors.white,
+            color:
+              currentPathTab === TabsName.Home ? colors.blue_100 : colors.white,
           },
-        }}
-        listeners={{
-          tabPress: () => setActiveTab(TabsName.Home),
         }}
       />
       <Tabs.Screen
-        name={TabsName.Register}
+        name={'register-vehicle'}
         options={{
           tabBarLabel: 'Register',
           tabBarIcon: () => (
             <RegisterSVG
               fill={
-                activeTab === TabsName.Register ? colors.blue_100 : colors.white
+                currentPathTab === TabsName.Register
+                  ? colors.blue_100
+                  : colors.white
               }
             />
           ),
           tabBarLabelStyle: {
             color:
-              activeTab === TabsName.Register ? colors.blue_100 : colors.white,
+              currentPathTab === TabsName.Register
+                ? colors.blue_100
+                : colors.white,
           },
-        }}
-        listeners={{
-          tabPress: () => setActiveTab(TabsName.Register),
         }}
       />
     </Tabs>

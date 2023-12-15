@@ -1,5 +1,10 @@
 import { useState } from 'react'
-import { ActivityIndicator, TouchableOpacity } from 'react-native'
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+} from 'react-native'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -51,7 +56,11 @@ export function SignInForm({ onSignIn, isPending }: SignInFormProps) {
   }
 
   return (
-    <>
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidingView}
+      enabled={Platform.OS === 'ios'}
+      behavior="padding"
+    >
       <Controller
         name="email"
         control={control}
@@ -128,6 +137,6 @@ export function SignInForm({ onSignIn, isPending }: SignInFormProps) {
           )}
         </TouchableOpacity>
       </LinearGradient>
-    </>
+    </KeyboardAvoidingView>
   )
 }

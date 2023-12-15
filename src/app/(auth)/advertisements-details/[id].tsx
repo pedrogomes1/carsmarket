@@ -74,7 +74,7 @@ export default function AdvertisementsDetails() {
           style={styles.picture}
         />
 
-        <Typography text="Overview" weight="semiBold" style={styles.title} />
+        <Typography text="Overview" weight="bold" style={styles.title} />
         <Typography text={data.description} style={styles.subtitle} />
 
         <View style={styles.containerInfo}>

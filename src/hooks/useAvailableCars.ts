@@ -13,6 +13,7 @@ export interface Advertisement {
   brand: {
     id: string
     logo: string
+    name: string
   }
 }
 export interface Advertisements {

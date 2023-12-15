@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://192.168.15.34:3333',
+  baseURL: 'https://carsmarket-server-pedrogomes1.vercel.app/',
 })

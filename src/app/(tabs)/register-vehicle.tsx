@@ -11,7 +11,7 @@ import { useUploadFile } from '@/hooks/useUploadFile'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'
-import { styles } from '../styles/register-vehicle.styles'
+import { styles } from '@/app/styles/register-vehicle.styles'
 
 export default function RegisterVehicle() {
   const { handleRegister, isPendingRegister } = useRegisterVehicle()
@@ -20,7 +20,6 @@ export default function RegisterVehicle() {
   async function handleRegisterNewVehicle(data: RegisterVehicleFormSchema) {
     try {
       const picture = await handleUploadFile(data.picture)
-
       handleRegister({ ...data, picture })
     } catch (error) {
       throw error

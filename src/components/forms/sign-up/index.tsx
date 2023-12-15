@@ -1,5 +1,10 @@
 import { useState } from 'react'
-import { ActivityIndicator, TouchableOpacity } from 'react-native'
+import {
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+} from 'react-native'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -52,7 +57,11 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
   }
 
   return (
-    <>
+    <KeyboardAvoidingView
+      style={styles.keyboardAvoidingView}
+      enabled={Platform.OS === 'ios'}
+      behavior="padding"
+    >
       <Controller
         name="name"
         control={control}
@@ -60,6 +69,7 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
           <Input.Root style={styles.inputRoot}>
             <Input.Icon icon={USER_ICON} />
             <Input.Text
+              autoFocus
               placeholder="Name"
               autoCapitalize="none"
               placeholderTextColor={colors.gray_400}
@@ -141,6 +151,7 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
+              returnKeyType="send"
             />
             <Input.Action
               onPress={handlePressVisiblePassword}
@@ -178,6 +189,6 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
           )}
         </TouchableOpacity>
       </LinearGradient>
-    </>
+    </KeyboardAvoidingView>
   )
 }

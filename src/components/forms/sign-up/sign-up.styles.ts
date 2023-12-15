@@ -2,6 +2,9 @@ import { StyleSheet } from 'react-native'
 import { colors, fontSize, radius, spacing } from '@/styles/theme'
 
 export const styles = StyleSheet.create({
+  keyboardAvoidingView: {
+    width: '100%',
+  },
   inputRoot: {
     marginTop: spacing[20],
   },

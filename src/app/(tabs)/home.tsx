@@ -16,7 +16,7 @@ import { Advertisement, useAvailableCars } from '@/hooks/useAvailableCars'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'
-import { styles } from '../styles/home.styles'
+import { styles } from '@/app/styles/home.styles'
 
 const SEARCH_ICON = (
   <AntDesign name="search1" size={24} color={colors.gray_400} />
@@ -101,7 +101,7 @@ export default function Home() {
               name="filter-remove-outline"
             />
             <Typography
-              text="No advertisements found by this filter."
+              text="No advertisements found."
               style={styles.notFoundText}
             />
           </View>

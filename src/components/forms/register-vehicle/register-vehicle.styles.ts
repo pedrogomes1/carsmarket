@@ -12,8 +12,11 @@ export const styles = StyleSheet.create({
   },
   descriptionInput: {
     flex: 1,
+    paddingTop: spacing[12],
     textAlignVertical: 'top',
+    alignSelf: 'flex-start',
     color: colors.white,
+    lineHeight: spacing[20],
   },
   dropdown: {
     backgroundColor: colors.blue_900,
@@ -28,11 +31,11 @@ export const styles = StyleSheet.create({
     color: colors.red,
   },
   containerImagePicker: {
-    height: 120,
+    height: 180,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: radius[10],
-    borderColor: colors.blue_900,
+    borderColor: colors.gray_500,
     borderWidth: 1,
     borderStyle: 'dashed',
   },
