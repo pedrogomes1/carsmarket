@@ -47,7 +47,8 @@ export const styles = StyleSheet.create({
 
   buttonDeletePreview: {
     position: 'absolute',
-    right: 0,
+    right: 5,
+    top: 5,
     zIndex: 2,
   },
   previewImage: {

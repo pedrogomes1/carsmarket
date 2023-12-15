@@ -48,17 +48,15 @@ export function RegisterAdvertisementForm({
     reset,
     clearErrors,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm<RegisterAdvertisementFormSchema>({
     resolver: zodResolver(RegisterAdvertisementValidationSchema),
   })
 
   const onSubmit = (data: RegisterAdvertisementFormData) => {
     onRegister(data)
-    if (isSubmitSuccessful) {
-      reset()
-      setValue('picture', '')
-    }
+    reset()
+    setValue('picture', '')
   }
 
   async function openImagePicker() {
@@ -276,7 +274,7 @@ export function RegisterAdvertisementForm({
                 setValue('picture', '', { shouldValidate: true })
               }}
             >
-              <FeatherIcon name="trash-2" size={22} color={colors.red} />
+              <FeatherIcon name="trash-2" size={26} color={colors.red} />
             </TouchableOpacity>
             <Image
               alt="Preview image"
