@@ -2,6 +2,7 @@ import { router } from 'expo-router'
 import { useMutation } from '@tanstack/react-query'
 import { useToast } from 'react-native-toast-notifications'
 
+import { client } from '@/app/_layout'
 import { api } from '@/libs/api'
 import { useAuth } from './useAuth'
 import { RegisterVehicleFormSchema } from '@/components/forms/register-vehicle'
@@ -25,6 +26,9 @@ export function useRegisterVehicle() {
         value,
       })
       router.replace('/home')
+    },
+    onSuccess: () => {
+      client.invalidateQueries({ queryKey: ['advertisementsList'] })
     },
     onError: () => {
       toast.show('Error to register new vehicle', {
