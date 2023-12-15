@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useToast } from 'react-native-toast-notifications'
-
-import { api } from '@/libs/api'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { storage } from '../config/firebase'
 
 export function useUploadFile() {
   const toast = useToast()
@@ -12,21 +12,16 @@ export function useUploadFile() {
     isPending: isPendingUpload,
   } = useMutation({
     mutationFn: async (pictureUri: string) => {
-      const uploadFormData = new FormData()
+      const response = await fetch(pictureUri)
+      const blob = await response.blob()
 
-      uploadFormData.append('file', {
-        uri: pictureUri,
-        name: 'image.jpg',
-        type: 'image/jpeg',
-      } as any)
+      const storageRef = ref(storage, 'cars/' + new Date().getTime())
 
-      const file = await api.post('/upload', uploadFormData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      const upload = await uploadBytes(storageRef, blob)
+
+      return await getDownloadURL(upload.ref).then(async (downloadURL) => {
+        return downloadURL
       })
-
-      return file.data.fileUrl
     },
     onError: () => {
       toast.show('Error to upload file', {
