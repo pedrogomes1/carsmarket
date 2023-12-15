@@ -42,6 +42,8 @@ export type SignUpFormSchema = z.infer<typeof signUpValidationSchema>
 
 export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
   const [shouldHidePassword, setShouldHidePassword] = useState(true)
+  const [shouldHideConfirmPassword, setShouldHideConfirmPassword] =
+    useState(true)
 
   const {
     control,
@@ -52,8 +54,13 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
   })
 
   const onSubmit = (data: SignUpFormSchema) => onSignUp(data)
+
   function handlePressVisiblePassword() {
     setShouldHidePassword((prev) => !prev)
+  }
+
+  function handlePressVisibleConfirmPassword() {
+    setShouldHideConfirmPassword((prev) => !prev)
   }
 
   return (
@@ -145,7 +152,7 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
             <Input.Icon icon={LOCK_ICON} />
             <Input.Text
               placeholder="Confirm password"
-              secureTextEntry={shouldHidePassword}
+              secureTextEntry={shouldHideConfirmPassword}
               autoCapitalize="none"
               placeholderTextColor={colors.gray_400}
               onBlur={onBlur}
@@ -154,8 +161,8 @@ export function SignUpForm({ onSignUp, isPending }: SignUpFormProps) {
               returnKeyType="send"
             />
             <Input.Action
-              onPress={handlePressVisiblePassword}
-              icon={getPasswordIcon(shouldHidePassword)}
+              onPress={handlePressVisibleConfirmPassword}
+              icon={getPasswordIcon(shouldHideConfirmPassword)}
             />
           </Input.Root>
         )}

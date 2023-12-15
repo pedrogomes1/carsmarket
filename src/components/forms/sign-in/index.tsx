@@ -73,6 +73,9 @@ export function SignInForm({ onSignIn, isPending }: SignInFormProps) {
               inputMode="email"
               placeholderTextColor={colors.gray_400}
               onBlur={onBlur}
+              autoCorrect={false}
+              spellCheck={false}
+              autoComplete="email"
               onChangeText={onChange}
               value={value}
             />
