@@ -1,7 +1,7 @@
 import { transformCurrencyToNumber } from '@/utils/transformCurrencyToNumber'
 import { z } from 'zod'
 
-export const RegisterVehicleValidationSchema = z.object({
+export const RegisterAdvertisementValidationSchema = z.object({
   description: z
     .string({ required_error: 'Description is mandatory' })
     .min(1, 'Description is mandatory'),

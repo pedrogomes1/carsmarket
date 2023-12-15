@@ -7,7 +7,7 @@ import { RegisterSVG } from '@/assets/svgs/RegisterIcon'
 
 enum TabsName {
   Home = '/home',
-  Register = '/register-vehicle',
+  Register = '/register-advertisement',
 }
 
 export default function TabsLayout() {
@@ -50,7 +50,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name={'register-vehicle'}
+        name={'register-advertisement'}
         options={{
           tabBarLabel: 'Register',
           tabBarIcon: () => (

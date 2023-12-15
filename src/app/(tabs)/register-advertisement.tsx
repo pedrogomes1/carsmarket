@@ -3,21 +3,23 @@ import { ScrollView, ImageBackground, Pressable } from 'react-native'
 import Icon from '@expo/vector-icons/Ionicons'
 
 import {
-  RegisterVehicleForm,
-  RegisterVehicleFormSchema,
-} from '@/components/forms/register-vehicle'
-import { useRegisterVehicle } from '@/hooks/useRegisterVehicle'
+  RegisterAdvertisementForm,
+  RegisterAdvertisementFormSchema,
+} from '@/components/forms/register-advertisement'
+import { useRegisterAdvertisement } from '@/hooks/useRegisterAdvertisement'
 import { useUploadFile } from '@/hooks/useUploadFile'
 
 import blurBg from '@/assets/background.png'
 import { colors } from '@/styles/theme'
-import { styles } from '@/app/styles/register-vehicle.styles'
+import { styles } from '@/app/styles/register-advertisement.styles'
 
-export default function RegisterVehicle() {
-  const { handleRegister, isPendingRegister } = useRegisterVehicle()
+export default function RegisterAdvertisement() {
+  const { handleRegister, isPendingRegister } = useRegisterAdvertisement()
   const { handleUploadFile, isPendingUpload } = useUploadFile()
 
-  async function handleRegisterNewVehicle(data: RegisterVehicleFormSchema) {
+  async function handleRegisterNewAdvertisement(
+    data: RegisterAdvertisementFormSchema,
+  ) {
     try {
       const picture = await handleUploadFile(data.picture)
       handleRegister({ ...data, picture })
@@ -37,8 +39,8 @@ export default function RegisterVehicle() {
           />
         </Pressable>
 
-        <RegisterVehicleForm
-          onRegister={handleRegisterNewVehicle}
+        <RegisterAdvertisementForm
+          onRegister={handleRegisterNewAdvertisement}
           isPending={isPendingRegister || isPendingUpload}
         />
       </ScrollView>

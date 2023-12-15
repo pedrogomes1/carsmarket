@@ -1,4 +1,4 @@
-export type RegisterVehicleFormData = {
+export type RegisterAdvertisementFormData = {
   description: string
   brand: string
   model: string

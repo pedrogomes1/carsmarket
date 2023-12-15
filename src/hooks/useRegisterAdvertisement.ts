@@ -5,14 +5,14 @@ import { useToast } from 'react-native-toast-notifications'
 import { client } from '@/app/_layout'
 import { api } from '@/libs/api'
 import { useAuth } from './useAuth'
-import { RegisterVehicleFormSchema } from '@/components/forms/register-vehicle'
+import { RegisterAdvertisementFormSchema } from '@/components/forms/register-advertisement'
 
-export function useRegisterVehicle() {
+export function useRegisterAdvertisement() {
   const toast = useToast()
   const { user } = useAuth()
 
   const { mutate: handleRegister, isPending: isPendingRegister } = useMutation({
-    mutationFn: async (data: RegisterVehicleFormSchema) => {
+    mutationFn: async (data: RegisterAdvertisementFormSchema) => {
       const { brand, city, description, model, picture, value, year } = data
 
       await api.post('/advertisements', {
@@ -31,7 +31,7 @@ export function useRegisterVehicle() {
       client.invalidateQueries({ queryKey: ['advertisementsList'] })
     },
     onError: () => {
-      toast.show('Error to register new vehicle', {
+      toast.show('Error to register new advertisement', {
         placement: 'top',
         type: 'danger',
       })

@@ -14,26 +14,26 @@ import { Button } from '@/components/ui/button'
 import { Typography } from '@/components/ui/typography'
 import {
   BranchDropdown,
-  RegisterVehicleFormData,
-} from './register-vehicle.types'
-import { RegisterVehicleValidationSchema } from './register-vehicle.validation'
+  RegisterAdvertisementFormData,
+} from './register-advertisement.types'
+import { RegisterAdvertisementValidationSchema } from './register-advertisement.validation'
 
 import { colors } from '@/styles/theme'
-import { styles } from './register-vehicle.styles'
-
-interface RegisterVehicleFormProps {
-  onRegister: (data: RegisterVehicleFormData) => void
+import { styles } from './register-advertisement.styles'
+// register-advertisement RegisterAdvertisement
+interface RegisterAdvertisementFormProps {
+  onRegister: (data: RegisterAdvertisementFormData) => void
   isPending: boolean
 }
 
-export type RegisterVehicleFormSchema = z.infer<
-  typeof RegisterVehicleValidationSchema
+export type RegisterAdvertisementFormSchema = z.infer<
+  typeof RegisterAdvertisementValidationSchema
 >
 
-export function RegisterVehicleForm({
+export function RegisterAdvertisementForm({
   onRegister,
   isPending,
-}: RegisterVehicleFormProps) {
+}: RegisterAdvertisementFormProps) {
   const [preview, setPreview] = useState<string | null>(null)
   const { data } = useBrand()
 
@@ -49,11 +49,11 @@ export function RegisterVehicleForm({
     clearErrors,
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
-  } = useForm<RegisterVehicleFormSchema>({
-    resolver: zodResolver(RegisterVehicleValidationSchema),
+  } = useForm<RegisterAdvertisementFormSchema>({
+    resolver: zodResolver(RegisterAdvertisementValidationSchema),
   })
 
-  const onSubmit = (data: RegisterVehicleFormData) => {
+  const onSubmit = (data: RegisterAdvertisementFormData) => {
     onRegister(data)
     if (isSubmitSuccessful) {
       reset()
@@ -287,7 +287,10 @@ export function RegisterVehicleForm({
         ) : (
           <View style={styles.containerSelectPreview}>
             <FeatherIcon name="image" size={30} color={colors.gray_100} />
-            <Typography text="Select vehicle image" color={colors.gray_100} />
+            <Typography
+              text="Select advertisement image"
+              color={colors.gray_100}
+            />
           </View>
         )}
       </TouchableOpacity>
