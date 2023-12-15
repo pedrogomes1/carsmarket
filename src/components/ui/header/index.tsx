@@ -13,7 +13,7 @@ export const Header = memo(function Header() {
   const { signOut, user } = useAuth()
   return (
     <View style={styles.container}>
-      <Avatar avatar={user!.photo} />
+      <Avatar avatar={user?.photo || undefined} />
       <View style={styles.containerProfile}>
         <Typography text="Welcome," />
         <Typography
