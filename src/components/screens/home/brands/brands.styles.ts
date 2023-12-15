@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 import { colors, radius, spacing } from '@/styles/theme'
 
 const CARD_SIZE = 88
-const IMAGE_SIZE = 30
+const IMAGE_SIZE = 35
 
 export const styles = StyleSheet.create({
   list: {
@@ -30,5 +30,6 @@ export const styles = StyleSheet.create({
   image: {
     width: IMAGE_SIZE,
     height: IMAGE_SIZE,
+    objectFit: 'contain',
   },
 })
