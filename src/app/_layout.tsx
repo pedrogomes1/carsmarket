@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import { AuthProvider } from '@/contexts/auth-provider'
 
-const client = new QueryClient()
+export const client = new QueryClient()
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
