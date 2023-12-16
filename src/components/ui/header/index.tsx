@@ -17,11 +17,7 @@ export const Header = memo(function Header() {
       'Exit',
       'Do you really want to exit the application?',
       [
-        {
-          onPress: () => console.log('Cancel Pressed'),
-          text: 'Cancel',
-          style: 'cancel',
-        },
+        { text: 'Cancel', style: 'cancel' },
         { text: 'Exit', onPress: () => signOut() },
       ],
       { userInterfaceStyle: 'dark' },
