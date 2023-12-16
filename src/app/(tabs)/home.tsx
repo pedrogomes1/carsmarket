@@ -57,8 +57,6 @@ export default function Home() {
     ? filteredAdvertisements
     : advertisements
 
-  if (isLoading) return <ActivityIndicator size={18} />
-
   return (
     <ImageBackground source={blurBg} style={styles.backgroundImage}>
       {isLoading ? (
