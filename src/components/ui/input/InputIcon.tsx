@@ -1,7 +1,5 @@
-import { ReactNode, ElementType } from 'react'
-
 interface IInputIcon {
-  icon: any // Arrumar
+  icon: any
 }
 
 export function InputIcon({ icon }: IInputIcon): JSX.Element {

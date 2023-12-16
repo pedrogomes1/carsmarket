@@ -1,7 +1,7 @@
 import { TouchableOpacity } from 'react-native'
 
 interface IInputIcon {
-  icon: any // Arrumar
+  icon: any
   onPress: () => void
 }
 
