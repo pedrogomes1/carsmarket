@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native'
 import { router, useLocalSearchParams } from 'expo-router'
-import { Ionicons, AntDesign } from '@expo/vector-icons'
+import { Ionicons } from '@expo/vector-icons'
 
 import { Typography } from '@/components/ui/typography'
 import { Button } from '@/components/ui/button'
@@ -16,29 +16,14 @@ import { formatCurrency } from '@/utils/formatCurrency'
 
 import blurBg from '@/assets/background.png'
 
-import { colors, spacing } from '@/styles/theme'
+import { colors } from '@/styles/theme'
 import { styles } from '@/app/styles/advertisement-details.styles'
-import { useFavorites } from '@/hooks/useFavorites'
 
 export default function AdvertisementsDetails() {
   const { id } = useLocalSearchParams()
 
-  const { data, isFetching, refetch } = useAdvertisementsDetails(id as string)
-  const { setFavorite, data: isFavorite } = useFavorites()
+  const { data, isFetching } = useAdvertisementsDetails(id as string)
 
-  async function updateFavorite() {
-    const favoritePressedId = data?.favorites[0]?.id || undefined
-    try {
-      await setFavorite({
-        id: favoritePressedId,
-        advertisementId: data!.id,
-      })
-      await refetch()
-    } catch (error) {
-      throw error
-    }
-  }
-  const isFavoriteAdvertisement = isFavorite || data?.favorites?.[0]?.isFavorite
   return (
     <ImageBackground source={blurBg} style={styles.background}>
       {isFetching ? (
@@ -49,21 +34,11 @@ export default function AdvertisementsDetails() {
             <Ionicons name="arrow-back" size={24} color={colors.gray_400} />
           </Pressable>
 
-          <View style={styles.containerHeader}>
-            <Typography
-              text={`${data?.brand?.name} ${data?.model}`}
-              weight="bold"
-              style={styles.title}
-            />
-            <Pressable onPress={updateFavorite}>
-              <AntDesign
-                name={isFavoriteAdvertisement ? 'heart' : 'hearto'}
-                size={spacing[20]}
-                color={colors.red}
-                style={styles.starIcon}
-              />
-            </Pressable>
-          </View>
+          <Typography
+            text={`${data?.brand?.name} ${data?.model}`}
+            weight="bold"
+            style={styles.title}
+          />
 
           <View style={styles.containerLocation}>
             <Ionicons name="location-sharp" size={20} color={colors.blue_300} />

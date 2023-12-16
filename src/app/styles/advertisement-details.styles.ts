@@ -13,12 +13,6 @@ export const styles = StyleSheet.create({
     marginTop: spacing[60],
     marginHorizontal: spacing[20],
   },
-  containerHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: spacing[12],
-  },
   containerLocation: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -27,6 +21,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: fontSize.xl,
+    marginTop: spacing[8],
   },
   subtitle: {
     fontSize: fontSize.sm,
@@ -43,9 +38,6 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.base,
     color: colors.gray_100,
   },
-  starIcon: {
-    marginRight: spacing[12],
-  },
   ratingNumber: {
     fontSize: fontSize.lg,
   },
@@ -61,6 +53,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: spacing[12],
+    marginBottom: spacing[20],
     height: spacing[48],
     borderRadius: radius[5],
     flex: 1,
