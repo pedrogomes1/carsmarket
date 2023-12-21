@@ -19,7 +19,7 @@ interface AvailableCarsProps {
 export function AvailableCars({ advertisements }: AvailableCarsProps) {
   function handleNavigateToAdvertisementsDetail({ id }: Advertisement) {
     router.replace({
-      pathname: `/(auth)/advertisements-details/${id}`,
+      pathname: `/advertisements-details/${id}`,
       params: { id },
     } as never)
   }
